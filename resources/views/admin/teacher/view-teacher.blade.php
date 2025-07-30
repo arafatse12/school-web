@@ -62,6 +62,7 @@
                     <th>Email</th>
                     <th>Mobile</th>
                     <th>Code</th>
+                    <th>Image</th>
                     <th>Status</th>
                     <th>Action</th>
                   </tr>
@@ -76,6 +77,7 @@
                       <td>{{$user->email}}</td>
                       <td>{{$user->mobile}}</td>
                      <td>{{$user->code}}</td>
+                     <td><img src="{{asset('upload/teacherimage/'.$user->image)}}" alt="" width="100" height="100"></td>
                       <td>
                      @if($user->status==1)
                     <span class="badge badge-success">Active</span>
@@ -128,18 +130,24 @@
               </button>
             </div>
             <div class="modal-body">
-            <form method="post" action="{{route('admin.teacher.store')}}" id="myform">
+            <form method="post" action="{{route('admin.teacher.store')}}" id="myform" enctype="multipart/form-data">
                 @csrf
                 
-                <div class="form-group row">
+                <div class="form-group row" hidden>
                     <label for="role_id"  class="col-sm-3 col-form-label">Role Name</label>
                   <div class="col-sm-9">
-                    <select name="role_id" id="role_id" class="form-control" autocomplete="off" value="{{old('role_id')}}">
+                    <select name="role_id" id="role_id" class="form-control">
                       <option value="">Select Role Name</option>
-                    @foreach($roles as $role)
-                    <option value="{{$role->id}}">{{$role->name}}</option>
-                    @endforeach
-                    </select>
+                          @foreach($roles as $role)
+                              <option value="{{ $role->id }}"
+                                  @if(old('role_id'))
+                                      {{ old('role_id') == $role->id ? 'selected' : '' }}
+                                  @else
+                                      {{ $role->name == 'teacher' ? 'selected' : '' }}
+                                  @endif
+                              >{{ $role->name }}</option>
+                          @endforeach
+                      </select>
                      <font style="color:red">{{($errors)->has('role_id')?($errors->first('role_id')):''}}</font>
                   </div>
                    </div>
@@ -160,6 +168,13 @@
                     <font style="color:red">{{($errors)->has('email')?($errors->first('email')):''}}</font>
                   </div>
                 </div>
+                <div class="form-group row">
+                    <label for="designation_name"  class="col-sm-3 col-form-label">Designation Name</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="designation_name" class="form-control" placeholder="Enter Designation" autocomplete="off" value="{{old('designation_name')}}">
+                        <font style="color:red">{{($errors)->has('designation_name')?($errors->first('  designation_name')):''}}</font>
+                      </div>
+                  </div>
 
                   {{-- <div class="form-group row">
                     <label for="desi_id"  class="col-sm-3 col-form-label">Designation Name</label>
@@ -187,11 +202,19 @@
                   </div>
                    </div> --}}
 
-                  <div class="form-group row">
+                <div class="form-group row">
                     <label for="mobile"  class="col-sm-3 col-form-label">Mobile</label>
                     <div class="col-sm-9">
                     <input type="text" name="mobile" id="mobile" class="form-control" placeholder="Enter Mobile Number" autocomplete="off" value="{{old('mobile')}}">
                       <font style="color:red">{{($errors)->has('mobile')?($errors->first('mobile')):''}}</font>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="mobile"  class="col-sm-3 col-form-label">Picture</label>
+                    <div class="col-sm-9">
+                    <input type="file" name="image" id="image" class="form-control">
+                      <font style="color:red">{{($errors)->has('image')?($errors->first('image')):''}}</font>
                   </div>
                 </div>
            
@@ -221,10 +244,10 @@
               </button>
             </div>
             <div class="modal-body">
-            <form method="post" action="{{route('admin.teacher.update',$user->id)}}" id="myform2">
+            <form method="post" action="{{route('admin.teacher.update',$user->id)}}" enctype="multipart/form-data" id="myform2">
                 @csrf
                 
-                <div class="form-group row">
+                <div class="form-group row" hidden>
                     <label for="role_id"  class="col-sm-3 col-form-label">Role Name</label>
                   <div class="col-sm-9">
                     <select name="role_id" id="role_id" class="form-control" autocomplete="off">
@@ -287,6 +310,29 @@
                     <input type="text" name="mobile" value="{{ $user->mobile }}" id="mobile2" class="form-control" placeholder="Enter Mobile Number" autocomplete="off">
                       <font style="color:red">{{($errors)->has('mobile')?($errors->first('mobile')):''}}</font>
                   </div>
+                </div>
+
+                 <div class="form-group row">
+                    <label for="designation_name"  class="col-sm-3 col-form-label">Designation Name</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="designation_name" class="form-control" placeholder="Enter Designation" autocomplete="off" value="{{ $user->designation_name }}">
+                        <font style="color:red">{{($errors)->has('designation_name')?($errors->first('  designation_name')):''}}</font>
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="image" class="col-sm-3 col-form-label">Picture</label>
+                    <div class="col-sm-9">
+                        <input type="file" name="image" id="image" class="form-control">
+                        <font style="color:red">
+                            {{ $errors->has('image') ? $errors->first('image') : '' }}
+                        </font>
+
+                        @if($user->image)
+                            <br>
+                            <img src="{{ asset('upload/teacherimage/'.$user->image) }}" alt="Old Image" width="100">
+                        @endif
+                    </div>
                 </div>
            
 
@@ -411,6 +457,14 @@ $(function () {
        
     
         
+      },
+
+      image: {
+        nullable: true,
+      },
+      designation_name: {
+        nullable: true,
+        designation_name: true
       }
     },
     messages: {
@@ -469,6 +523,13 @@ $(function () {
       address: {
       required: true,
         
+      },
+       image: {
+        nullable: true,
+      },
+      designation_name: {
+        nullable: true,
+        designation_name: true
       },
 
 

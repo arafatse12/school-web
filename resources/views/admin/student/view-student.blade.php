@@ -56,12 +56,12 @@
                   <thead>
                   <tr style="background-color: #001f3f;color: white">
                     <th>SL</th>
-                    <th>ID</th>
-                    <th>User Type</th>
+                    <th>Student Roll</th>
+                    <th>Class</th>
                     <th>Name</th>
-                    <th>Email</th>
                     <th>Mobile</th>
-                    <th>Code</th>
+                    <th>Address</th>
+                    <th>Image</th>
                     <th>Status</th>
                     <th>Action</th>
                   </tr>
@@ -70,12 +70,12 @@
                     @foreach($alldata as $key => $user)
             <tr>
                       <td>{{$key+1}}</td>
-                      <td>{{$user->id}}</td>
-                      <td>{{$user['role']['name']}}</td>
+                      <td>{{$user->roll}}</td>
+                      <td>{{$user->class}}</td>
                       <td>{{$user->name}}</td>
-                      <td>{{$user->email}}</td>
                       <td>{{$user->mobile}}</td>
-                     <td>{{$user->code}}</td>
+                      <td>{{$user->address}}</td>
+                     <td> <img src="{{asset('upload/studentimage/'.$user->image)}}" alt="" height="100" width="100"></td>
                       <td>
                      @if($user->status==1)
                     <span class="badge badge-success">Active</span>
@@ -128,21 +128,24 @@
               </button>
             </div>
             <div class="modal-body">
-            <form method="post" action="{{route('admin.student.store')}}" id="myform">
+            <form method="post" action="{{route('admin.student.store')}}" id="myform" enctype="multipart/form-data">
                 @csrf
                 
-                <div class="form-group row">
-                    <label for="role_id"  class="col-sm-3 col-form-label">Role Name</label>
-                  <div class="col-sm-9">
-                    <select name="role_id" id="role_id" class="form-control" autocomplete="off" value="{{old('role_id')}}">
-                      <option value="">Select Role Name</option>
-                    @foreach($roles as $role)
-                    <option value="{{$role->id}}">{{$role->name}}</option>
-                    @endforeach
-                    </select>
-                     <font style="color:red">{{($errors)->has('role_id')?($errors->first('role_id')):''}}</font>
+                  <div class="form-group row" hidden>
+                      <label for="role_id" class="col-sm-3 col-form-label">Role Name</label>
+                      <div class="col-sm-9">
+                          <select name="role_id" id="role_id" class="form-control" autocomplete="off">
+                              <option value="">Select Role Name</option>
+                              @foreach($roles as $role)
+                                  <option value="{{ $role->id }}" 
+                                      @if(old('role_id') == $role->id || $role->name == 'student') selected @endif>
+                                      {{ $role->name }}
+                                  </option>
+                              @endforeach
+                          </select>
+                          <font style="color:red">{{ $errors->has('role_id') ? $errors->first('role_id') : '' }}</font>
+                      </div>
                   </div>
-                   </div>
 
 
                   <div class="form-group row">
@@ -153,19 +156,57 @@
                   </div>
                 </div>
 
-                  <div class="form-group row">
+                 <div class="form-group row">
+                    <label for="class"  class="col-sm-3 col-form-label">Class</label>
+                    <div class="col-sm-9">
+                   <select name="class" id="class" class="form-control" autocomplete="off">
+                              <option value="">Select Class</option>
+                              @foreach($classes as $class)
+                                  <option value="{{ $class->name }}">
+                                      {{ $class->name }}
+                                  </option>
+                              @endforeach
+                          </select>
+                      <font style="color:red">{{($errors)->has('class')?($errors->first('class')):''}}</font>
+                  </div>
+                </div>
+                 <div class="form-group row">
+                    <label for="roll"  class="col-sm-3 col-form-label">Roll No</label>
+                    <div class="col-sm-9">
+                    <input type="text" name="roll" id="roll" class="form-control" placeholder="Roll No" autocomplete="off" value="{{old('roll')}}">
+                      <font style="color:red">{{($errors)->has('roll')?($errors->first('roll')):''}}</font>
+                  </div>
+                </div>
+
+                {{-- <div class="form-group row">
                     <label for="email"  class="col-sm-3 col-form-label">Email</label>
                     <div class="col-sm-9">
                     <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email" autocomplete="off" value="{{old('email')}}">
                     <font style="color:red">{{($errors)->has('email')?($errors->first('email')):''}}</font>
                   </div>
-                </div>
+                </div> --}}
 
-                  <div class="form-group row">
+                <div class="form-group row">
                     <label for="mobile"  class="col-sm-3 col-form-label">Mobile</label>
                     <div class="col-sm-9">
                     <input type="text" name="mobile" id="mobile" class="form-control" placeholder="Enter Mobile Number" autocomplete="off" value="{{old('mobile')}}">
                       <font style="color:red">{{($errors)->has('mobile')?($errors->first('mobile')):''}}</font>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="address"  class="col-sm-3 col-form-label">Address</label>
+                    <div class="col-sm-9">
+                    <input type="text" name="address" id="address" class="form-control" placeholder="Enter Address" autocomplete="off" value="{{old('address')}}">
+                      <font style="color:red">{{($errors)->has('address')?($errors->first('address')):''}}</font>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="image"  class="col-sm-3 col-form-label">Picture</label>
+                    <div class="col-sm-9">
+                    <input type="file" name="image" id="image" class="form-control">
+                      <font style="color:red">{{($errors)->has('image')?($errors->first('image')):''}}</font>
                   </div>
                 </div>
            
@@ -185,7 +226,7 @@
 </div>
   <!-- /.content-wrapper -->
 @foreach($alldata as $key => $user)
-  <div class="modal fade" id="editStudent-{{ $user->id }}" style="display: none;" aria-hidden="true">
+  <div class="modal fade" id="editStudent-{{ $user->id }}" style="display: none;" aria-hidden="true" >
         <div class="modal-dialog modal-small">
           <div class="modal-content"style="background-color:#d9dad6;border-bottom: 5px solid #605ca8 ;">
             <div class="modal-header " style="background-color: #605ca8;color: white;padding: 10px">
@@ -195,44 +236,71 @@
               </button>
             </div>
             <div class="modal-body">
-            <form method="post" action="{{route('admin.student.update',$user->id)}}" id="myform2">
+            <form method="post" action="{{route('admin.student.update',$user->id)}}" id="myform2" enctype="multipart/form-data">
                 @csrf
-                
+
                 <div class="form-group row">
-                    <label for="role_id"  class="col-sm-3 col-form-label">Role Name</label>
-                  <div class="col-sm-9">
-                    <select name="role_id" id="role_id" class="form-control" autocomplete="off">
-                      <option value="">Select Role Name</option>
-                    @foreach($roles as $role)
-                      <option value="{{$role->id}}" {{ $role->id == $user->role_id ?" selected":""}}>{{$role->name}}</option>
-                      @endforeach
-                    </select>
-                     <font style="color:red">{{($errors)->has('role_id')?($errors->first('role_id')):''}}</font>
-                  </div>
-                   </div>
-
-
-                  <div class="form-group row">
                      <label for="name"  class="col-sm-3 col-form-label">Name</label>
                  <div class="col-sm-9">
                     <input type="text" name="name" value="{{ $user->name }}" id="name" class="form-control" placeholder="Enter Name" autocomplete="off">
                      <font style="color:red">{{($errors)->has('name')?($errors->first('name')):''}}</font>
                   </div>
                 </div>
+                
+                <div class="form-group row">
+                    <label for="class"  class="col-sm-3 col-form-label">Class</label>
+                  <div class="col-sm-9">
+                    <select name="class" id="class" class="form-control" autocomplete="off">
+                      <option value="">Select Class</option>
+                    @foreach($classes as $class)
+                      <option value="{{$class->name}}" {{ $user->class == $class->name ?" selected":""}}>{{$class->name}}</option>
+                      @endforeach
+                    </select>
+                     <font style="color:red">{{($errors)->has('class')?($errors->first('class')):''}}</font>
+                  </div>
+                   </div>
 
-                  <div class="form-group row">
+
+                 
+
+                <div class="form-group row">
+                    <label for="roll"  class="col-sm-3 col-form-label">Roll No</label>
+                    <div class="col-sm-9">
+                    <input type="text" name="roll" id="roll" class="form-control" placeholder="Roll No" autocomplete="off" value="{{ $user->roll }}" >
+                      <font style="color:red">{{($errors)->has('roll')?($errors->first('roll')):''}}</font>
+                  </div>
+                </div>
+
+                {{-- <div class="form-group row">
                     <label for="email"  class="col-sm-3 col-form-label">Email</label>
                     <div class="col-sm-9">
                     <input type="email" value="{{ $user->email }}" name="email" id="email" class="form-control" placeholder="Enter Email" autocomplete="off">
                     <font style="color:red">{{($errors)->has('email')?($errors->first('email')):''}}</font>
                   </div>
-                </div>
+                </div> --}}
 
                   <div class="form-group row">
                     <label for="mobile"  class="col-sm-3 col-form-label">Mobile</label>
                     <div class="col-sm-9">
-                    <input type="text" name="mobile" value="{{ $user->mobile }}" id="mobile2" class="form-control" placeholder="Enter Mobile Number" autocomplete="off">
+                    <input type="text" name="mobile" value="{{ $user->mobile }}" id="mobile" class="form-control" placeholder="Enter Mobile Number" autocomplete="off">
                       <font style="color:red">{{($errors)->has('mobile')?($errors->first('mobile')):''}}</font>
+                  </div>
+                </div>
+
+                 <div class="form-group row">
+                    <label for="address"  class="col-sm-3 col-form-label">Address</label>
+                    <div class="col-sm-9">
+                    <input type="text" name="address" value="{{ $user->address }}" id="address" class="form-control" placeholder="Enter Address" autocomplete="off">
+                      <font style="color:red">{{($errors)->has('address')?($errors->first('address')):''}}</font>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="image"  class="col-sm-3 col-form-label">Picture</label>
+                    <div class="col-sm-9">
+                      <img src="{{asset('upload/studentimage/'. $user->image)}}" alt="" height="200" width="200">
+                    <input type="file" name="image" id="image" class="form-control">
+                      <font style="color:red">{{($errors)->has('image')?($errors->first('image')):''}}</font>
                   </div>
                 </div>
            
@@ -268,16 +336,12 @@
            
            <table class="table table-bordered table-hover table-sm" >
             <tr>
-              <th width="30%">Student ID</th>
-              <th width="70%">{{ $user->id }}</th>
+              <th width="30%">Student Roll</th>
+              <th width="70%">{{ $user->roll }}</th>
             </tr>
             <tr>
               <th width="30%"> Name</th>
               <th width="70%">{{ $user->name }}</th>
-            </tr>
-            <tr>
-              <th width="30%">Email</th>
-              <th width="70%">{{ $user->email }}</th>
             </tr>
             <tr>
               <th width="30%"> Mobile</th>
@@ -290,20 +354,9 @@
              <tr>
               <th width="30%">Student Photo</th>
                <td>
-                        @if($user->role_id == 1)
-                        <img style="width: 80px;height: 100px" class="profile-user-img img-fluid "
-                       src="{{(!empty($user->image))?url('upload/adminimage/'.$user->image):url('upload/userimage.png')}}"
+                  <img style="width: 80px;height: 100px" class="profile-user-img img-fluid "
+                       src="{{(!empty($user->image))?url('upload/studentimage/'.$user->image):url('upload/userimage.png')}}"
                        alt="User profile picture">
-                       @elseif($user->role_id == 2)
-                        <img style="width: 80px;height: 100px" class="profile-user-img img-fluid "
-                       src="{{(!empty($user->image))?url('upload/librarianimage/'.$user->image):url('upload/userimage.png')}}"
-                       alt="User profile picture">
-                        @elseif($user->role_id == 3)
-                        <img style="width: 80px;height: 100px" class="profile-user-img img-fluid "
-                       src="{{(!empty($user->image))?url('upload/userimage/'.$user->image):url('upload/userimage.png')}}"
-                       alt="User profile picture">
-                       @endif
-
                      </td>
             </tr>
            </table>
@@ -329,19 +382,19 @@ $(function () {
   $('#myform').validate({
     rules: {
 
-      role_id: {
-      required: true,
-        
-      },
       name: {
         required: true,
         
       },
-      mobile2: {
+      mobile: {
         required: true,
         
       },
-      gender: {
+      roll: {
+        required: true,
+        
+      },
+      class: {
         required: true,
         
       },
@@ -351,14 +404,6 @@ $(function () {
         
       },
 
-
-      email: {
-        required: true,
-        email: true
-       
-    
-        
-      }
     },
     messages: {
       email: {
@@ -369,6 +414,18 @@ $(function () {
 
       name: {
         required: "Please enter Name",
+        
+      },
+      mobile: {
+        required: "Please enter mobile",
+        
+      },
+      class: {
+        required: "Please enter class",
+        
+      },
+      roll: {
+        required: "Please enter roll",
         
       }
       
@@ -396,10 +453,6 @@ $(function () {
   $('#myform2').validate({
     rules: {
 
-      role_id: {
-      required: true,
-        
-      },
       name: {
         required: true,
         
@@ -408,7 +461,7 @@ $(function () {
         required: true,
         
       },
-      gender: {
+      roll: {
         required: true,
         
       },
@@ -419,11 +472,8 @@ $(function () {
       },
 
 
-      email: {
+      class: {
         required: true,
-        email: true
-       
-    
         
       }
     },
@@ -437,7 +487,19 @@ $(function () {
       name: {
         required: "Please enter Name",
         
-      }
+      },
+       mobile: {
+        required: "Please enter mobile",
+        
+      },
+       roll: {
+        required: "Please enter roll",
+        
+      },
+       class: {
+        required: "Please enter class",
+        
+      },
       
       
    

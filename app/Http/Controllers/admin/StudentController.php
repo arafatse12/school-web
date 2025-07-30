@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Role;
 use Auth;
+use File;
 use Hash;
-use App\Models\ClassName;
+use App\Models\Book;
+use App\Models\Role;
+use App\Models\User;
 use App\Models\Group;
 use App\Models\Section;
 use App\Models\Session;
-use App\Models\IssueBook;
-use App\Models\Book;
 use App\Models\Category;
+use App\Models\ClassName;
+use App\Models\IssueBook;
+use App\Models\StudentClass;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 
 class StudentController extends Controller
@@ -22,6 +24,7 @@ class StudentController extends Controller
     public function view(){
     $data['alldata'] = User::where('role_id','3')->get();
     $data['roles'] = Role::get();
+    $data['classes'] = StudentClass::get();
     return view('admin.student.view-student',$data);
     }
 
@@ -40,23 +43,34 @@ class StudentController extends Controller
 
             $this->validate($request,[
             'name'=>'required',
-            'email'=>'required|unique:users,email',
             'mobile'=>'required',
-            'role_id'=>'required',
+            'roll'=>'required',
+            'class'=>'required',
+            'address'=>'nullable',
         ]);
 
-        $code = rand(000000,999999);
+      $code = rand(000000,999999);
         
     	$data = new User();
-    	$data->role_id = $request->role_id;
-        $data->name = $request->name;
-    	$data->email = $request->email;
+
+      if ($request->hasFile('image')) {
+          $file = $request->file('image');
+          $filename = time() . '_' . $file->getClientOriginalName();
+          $file->move(public_path('upload/studentimage'), $filename);
+          $data->image = $filename; // ✅ only filename saved
+      }
+    	$data->role_id = 3;
+      $data->name = $request->name;
+    	$data->email = 'student' . rand(1, 9999) . '@gmail.com';
     	$data->mobile = $request->mobile;
-        $data->password = Hash::make($code);
+    	$data->roll = $request->roll;
+    	$data->class = $request->class;
+    	$data->address = $request->address;
+      $data->password = Hash::make($code);
     	$data->code = $code;
     	$data->save();
 
-    	return redirect()->route('admin.student.view')->with('success','Librarian Created Successfully');
+    	return redirect()->route('admin.student.view')->with('success','Student Created Successfully');
     }
         
         public function edit($id){
@@ -68,26 +82,42 @@ class StudentController extends Controller
         public function update(Request $request,$id){
 
 
-             $this->validate($request,[
+            $this->validate($request,[
             'name'=>'required',
-            'email'=>'required',
             'mobile'=>'required',
-            'role_id'=>'required',
+            'roll'=>'required',
+            'class'=>'required',
+            'address'=>'nullable',
         ]);
              $this->validate($request,[
             'name'=>'required',
-            'email'=>'required',
             'mobile'=>'required',
-            'role_id'=>'required',
+            'roll'=>'required',
+            'class'=>'required',
+            'address'=>'nullable',
         ]);
             $data = User::find($id);
-         $data->role_id = $request->role_id;
+
+          if ($request->hasFile('image')) {
+            // Delete old image if it exists
+            $oldPath = public_path('upload/studentimage/' . $data->image);
+            if ($data->image && File::exists($oldPath)) {
+                File::delete($oldPath);
+            }
+
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('upload/studentimage'), $filename);
+            $data->image = $filename; // ✅ only filename saved
+        }
         $data->name = $request->name;
-        $data->email = $request->email;
          $data->mobile = $request->mobile;
+         $data->roll = $request->roll;
+         $data->class = $request->class;
+         $data->address = $request->address;
         $data->save();
 
-        return redirect()->route('admin.student.view')->with('success','Librarian Updated Successfully');
+        return redirect()->route('admin.student.view')->with('success','Student Updated Successfully');
 
         }
 
@@ -95,7 +125,7 @@ class StudentController extends Controller
             $user = User::find($id);
             $user->status = 0;
             $user->save();
-           return redirect()->route('admin.student.view')->with('success','Librarian Inactive Successfully');
+           return redirect()->route('admin.student.view')->with('success','Student Inactive Successfully');
         }
 
         public function active($id){

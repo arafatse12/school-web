@@ -14,6 +14,7 @@ use App\Models\Course;
 use App\Models\Slider;
 use App\Models\Contact;
 use App\Models\Setting;
+use App\Models\Sikriti;
 use App\Models\Academic;
 use App\Models\Resource;
 use App\Models\Admission;
@@ -155,6 +156,14 @@ class FrontendController extends Controller
     return View('frontend.single.campus.about',$data);
     }
 
+    public function sikritiList(){
+        $data['principals'] = Principal::all();
+        $data['sliders'] = Slider::where('status',1)->orderBy('id','asc')->limit(5)->get();
+        $data['setting'] = Setting::where('status',1)->first();
+        $data['sikrities'] = Sikriti::orderBy('id','asc')->paginate(20);
+        return View('frontend.single.academic.sikriti',$data);
+    }
+
      public function history(){
         $data['principals'] = Principal::all();
         $data['sliders'] = Slider::where('status',1)->orderBy('id','asc')->limit(5)->get();
@@ -269,7 +278,7 @@ class FrontendController extends Controller
         $data['sliders'] = Slider::where('status',1)->orderBy('id','asc')->limit(5)->get();
         $data['setting'] = Setting::where('status',1)->first();
         $data['academic'] = Academic::first();
-        $data['teachers'] = User::where('role_id',2)->paginate(10);
+        $data['teachers'] = User::where('role_id',2)->paginate(12);
     return View('frontend.single.academic.teacher',$data);
     }
      public function office(){
@@ -371,6 +380,10 @@ class FrontendController extends Controller
         $data['sliders'] = Slider::where('status',1)->orderBy('id','asc')->limit(5)->get();
         $data['setting'] = Setting::where('status',1)->first();
         $data['student'] = St::first();
+        $data['students'] = User::where('role_id', 3)
+            ->orderBy('class','desc')
+            ->paginate(20);
+
     return View('frontend.single.student.our-student',$data);
 
     } public function studentSuccess(){

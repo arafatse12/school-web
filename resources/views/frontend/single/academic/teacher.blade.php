@@ -41,7 +41,7 @@
                 <thead>
                 <tr style="background-color: #001f3f;color: white;font-weight:bold;">
                     <td width="20%">Name</td>
-					 <td width="20%">Designation</td>
+					          <td width="20%">Designation</td>
                     <td width="20%">Email</td>
                     <td width="20%">Mobile</td>
                     <td width="20%">Image</td>
@@ -54,18 +54,18 @@
                    <td>
                       {{ $teacher->name }}
                    </td>
-				   <td>
-                      {{-- {{ $teacher->email }} --}}
-					  {{'Assistant Teacher'}}
+				            <td>
+                     {{ $teacher->designation_name ?? '' }}
                    </td>
-				    <td>
-						{{ $teacher->email }} 
-                     
-                   </td>
-				   <td>
+                    <td>
+                    {{ $teacher->email }} 
+                            
+                    </td>
+                  <td>
                        {{ $teacher->mobile }}
                    </td>
-                      <td><img src="{{ asset('upload/teacherimage/'.$teacher->image) }}" width="100" height="100">
+                      <td><img src="{{ !empty($teacher->image) ? asset('upload/teacherimage/' . $teacher->image) : asset('upload/teacherimage/default.png') }}"
+                        width="100" height="100" alt="Teacher Image">
 
                     </td>
                   </tr>

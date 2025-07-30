@@ -17,14 +17,11 @@
 
         <span style="font-weight: bold;">সকল কারিগরি সহযোগিতায়</span>
         <br>
-        <span style="font-weight: bold; font-size: 14px;"><a href="http://www.elitedesign.com.bd" target="_blank"> এলিট ডিজাইন</a></span><br>
-        <span style="font-weight: bold;">বড়বাড়ি, লালমনির হাট</span>
-        <span style="font-weight: bold;">মোবাইল : ০১৭৭৫৪৫৭০০৮, ০১৯৫৪৫৭৮০৮৯</span>
-
-
+        <span style="font-weight: bold; font-size: 14px;"><a href="#" target="_blank">Kazi Arafat Mia</a></span><br>
+        <span style="font-weight: bold;">মোবাইল : ০১৭৪২৩৯০৯৫৭</span>
         <br>
         <span style="font-weight: bold;">ওয়েব সাইট ডিজাইন</span>
-        <span style="font-weight: bold; font-size: 14px;"><a href="http://www.elitedesign.com.bd" target="_blank"> এলিট ডিজাইন</a></span><br>
+        <span style="font-weight: bold; font-size: 14px;"><a href="#" target="_blank">Kazi Arafat Mia</a></span><br>
     </div>
     <!-- /footer -->
 </div>

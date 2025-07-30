@@ -7,7 +7,7 @@
 	<div class="twelve columns" id="left-content">
 	<br>
 	
-	<h4 style="font-weight: bold;">প্রাতিষ্ঠানিক কাঠামো :</h4>
+	<h4 style="font-weight: bold;">প্রধান শিক্ষকের বাণী :</h4>
 	<hr>
   <div style="text-align: justify;">
             <p>{!!$campus->structure!!}</p>

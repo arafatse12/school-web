@@ -7,7 +7,7 @@
 	<div class="twelve columns" id="left-content">
 	<br>
 	
-	<h4 style="font-weight: bold;">প্রাতিষ্ঠানিক অবকাঠামো :</h4>
+	<h4 style="font-weight: bold;">সম্পদ-বিবরণী :</h4>
 	<hr>
   <div style="text-align: justify;">
             <p>{!!$campus->infrastructure!!}</p>

@@ -47,17 +47,26 @@ class TeacherController extends Controller
             'email'=>'required|unique:users,email',
             'mobile'=>'required',
             'role_id'=>'required',
-            // 'subject_id'=>'required',
-            // 'desi'=>'required',
+            'image'=> 'nullable',
+            'designation_name'=>'nullable',
         ]);
 
-        $code = rand(000000,999999);
-        
+      $code = rand(000000,999999);
+      
+
     	$data = new User();
+      
+      if ($request->hasFile('image')) {
+          $file = $request->file('image');
+          $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+          $file->move(public_path('upload/teacherimage'), $filename);
+          $data->image = $filename;
+      }
     	$data->role_id = $request->role_id;
         $data->name = $request->name;
     	$data->email = $request->email;
     	$data->mobile = $request->mobile;
+    	$data->designation_name = $request->designation_name;
         // $data->subject_id = $request->subject_id;
         // $data->desi_id = $request->desi_id;
         $data->password = Hash::make($code);
@@ -87,13 +96,29 @@ class TeacherController extends Controller
             'email'=>'required',
             'mobile'=>'required',
             'role_id'=>'required',
-            // 'subject_id'=>'required',
+            'image' => 'nullable',
+            'designation_name'=>'nullable',
             // 'desi'=>'required',
         ]);
             $data = User::find($id);
+
+            if ($request->hasFile('image')) {
+              if (!empty($data->image) && file_exists(public_path('upload/teacherimage/' . $data->image))) {
+                  unlink(public_path('upload/teacherimage/' . $data->image));
+              }
+
+              // Upload new image
+              $file = $request->file('image');
+              $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+              $file->move(public_path('upload/teacherimage'), $filename);
+
+              // Save new path to DB
+              $data->image = $filename;
+          }
          $data->role_id = $request->role_id;
         $data->name = $request->name;
         $data->email = $request->email;
+        $data->designation_name = $request->designation_name;
         //  $data->subject_id = $request->subject_id;
         // $data->desi_id = $request->desi_id;
          $data->mobile = $request->mobile;

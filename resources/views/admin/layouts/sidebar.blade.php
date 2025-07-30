@@ -1,8 +1,8 @@
  <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="https://www.elitedesign.com.bd" class="brand-link">
+    <a href="#" class="brand-link">
       <img src="{{ asset('backend') }}/dist/img/elite.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Elite design</span>
+      <span class="brand-text font-weight-light">School Dashboard</span>
     </a>
 
     <!-- Sidebar -->
@@ -115,11 +115,20 @@
             <a href="{{ route('admin.campus.view') }}" class="nav-link {{ request()->is('admin/campus/view') ? 'active' : '' }}">
               <i class="fas fa-campground mr-2"></i>
               <p>
-                Campus Manage
-               
+                বিদ্যালয়ের তথ্য
               </p>
             </a>
           </li>
+
+           <li class="nav-item">
+            <a href="{{ route('admin.sikriti.view') }}" class="nav-link {{ request()->is('admin/sikriti/view') ? 'active' : '' }}">
+              <i class="fas fa-campground mr-2"></i>
+              <p>
+                স্বীকৃতি
+              </p>
+            </a>
+          </li>
+          
 
            <li class="nav-item">
             <a href="{{ route('admin.academic.view') }}" class="nav-link {{ request()->is('admin/academic/view') ? 'active' : '' }}">

@@ -4,7 +4,7 @@
 @include('frontend.layouts.notice')
 
 <div class="row">
-   {{--  <div id="box-1" class="six columns service-box box" style="height: auto;">
+    <div id="box-1" class="six columns service-box box" style="height: auto;">
         <h4>স্বাধীনতার সুবর্ণজয়ন্তী</h4>
         <img src="{{ asset('frontend') }}/assets/images/icon/shuborno.png" width="100" height="">      
         <ul class="caption fade-caption" style="margin:0">
@@ -28,7 +28,7 @@
             <li><a href="/site/view/annual_reports/বার্ষিক-প্রতিবেদন" title="বার্ষিক প্রতিবেদন">বার্ষিক প্রতিবেদন</a></li>
             
         </ul>
-    </div> --}}
+    </div>
 
 </div>
  <div class="row">

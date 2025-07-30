@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -100,6 +99,7 @@ Route::get('/honours', [App\Http\Controllers\Frontend\FrontendController::class,
 
 Route::get('/photo-gallery', [App\Http\Controllers\Frontend\FrontendController::class, 'photoGallery'])->name('photo.gallery');
 Route::get('/video-gallery', [App\Http\Controllers\Frontend\FrontendController::class, 'videoGallery'])->name('video.gallery');
+Route::get('/sikriti', [App\Http\Controllers\Frontend\FrontendController::class, 'sikritiList']);
 
 
 
@@ -154,6 +154,13 @@ Route::post('student/class/update/{id}',[App\Http\Controllers\admin\StudentClass
 Route::get('student/class-active/{id}',[App\Http\Controllers\admin\StudentClassController::class,'active'])->name('admin.studentclass.active');
     Route::get('student class-inactive/{id}',[App\Http\Controllers\admin\StudentClassController::class,'inactive'])->name('admin.studentclass.inactive');
 Route::get('student/class/delete/{id}',[App\Http\Controllers\admin\StudentClassController::class,'delete'])->name('admin.studentclass.delete');
+
+    // ===================Sikriti Post===============
+
+    Route::get('sikriti/view', [App\Http\Controllers\admin\SikritiController::class, 'view'])->name('admin.sikriti.view');
+    Route::post('sikriti/store', [App\Http\Controllers\admin\SikritiController::class, 'store'])->name('admin.sikriti.store');
+    Route::post('sikriti/update/{id}', [App\Http\Controllers\admin\SikritiController::class, 'update'])->name('admin.sikriti.update');
+    Route::get('sikriti/delete/{id}', [App\Http\Controllers\admin\SikritiController::class, 'delete'])->name('admin.sikriti.delete');
 
     // ===================Student Post===============
      Route::get('post/view',[App\Http\Controllers\admin\PostController::class,'view'])->name('admin.post.view');

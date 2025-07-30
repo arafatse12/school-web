@@ -14,7 +14,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-              <li class="breadcrumb-item active">Campus List</li>
+              <li class="breadcrumb-item active"> বিদ্যালয়ের তথ্য</li>
             </ol>
           </div>
         </div><!-- /.row -->
@@ -47,7 +47,7 @@
            
             <div class="pannel" style="background-color:white;border-bottom: 5px solid #605ca8 ;margin-bottom: 20px;">
              <div class="pannel-header" style="background-color: #605ca8;color: white;padding: 10px">
-                <h5>Campus List
+                <h5> বিদ্যালয়ের তথ্য
                  <button type="button" class="btn btn-warning float-right btn" data-toggle="modal" data-target="#addCampus"><i class="fa fa-plus-circle"></i> Add Campus</button>
                 </h5>
               </div> 
@@ -57,12 +57,12 @@
                   <tr style="background-color: #001f3f;color: white">
                     
                     
-                     <th>About</th>
-                     <th>History</th>
-                     <th>Structure</th>
-                     <th>Mission Vission</th>
-                    <th>Infrastructure</th>
-                    <th>Purification</th>
+                     {{-- <th>স্বীকৃতি</th> --}}
+                     <th>ইতিহাস</th>
+                     <th>প্রধান শিক্ষকের বাণী</th>
+                     {{-- <th>Mission Vission</th> --}}
+                    <th>সম্পদ</th>
+                    {{-- <th>Purification</th> --}}
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -70,12 +70,12 @@
                     @foreach($alldata as $key => $campus)
             <tr>
                       
-                      <td>{!!$campus->about!!}</td>
+                      {{-- <td>{!!$campus->about!!}</td> --}}
                       <td>{!!$campus->history!!}</td>
-                      <td>{!!$campus->mv!!}</td>
+                      {{-- <td>{!!$campus->mv!!}</td> --}}
                       <td>{!!$campus->structure!!}</td>
                      <td>{!!$campus->infrastructure!!}</td>
-                     <td>{!!$campus->purification!!}</td>
+                     {{-- <td>{!!$campus->purification!!}</td> --}}
                       <td>
                     <button type="button" class="btn btn-dark  btn-xs" data-toggle="modal" data-target="#showCampus-{{ $campus->id }}"><i class="fa fa-eye"></i></button>
 
@@ -119,19 +119,19 @@
 <div class="row">
                   
 
-                  <div class="form-group col-md-6">
-                     <label for="about"  class="col-sm-12 col-form-label">Insititute About</label>
+                  {{-- <div class="form-group col-md-6">
+                     <label for="about"  class="col-sm-12 col-form-label">স্বীকৃতি</label>
                  <div class="col-sm-12">
                     <textarea type="text" name="about" id="title" class="form-control " placeholder="Enter About" autocomplete="off" value="{{old('about')}}"></textarea>
                      <font style="color:red">{{($errors)->has('about')?($errors->first('about')):''}}</font>
                   </div>
-                </div>
+                </div> --}}
 
                 
                  
 
                   <div class="form-group col-md-6">
-                    <label for="history"  class="col-sm-12 col-form-label">Insititute History</label>
+                    <label for="history"  class="col-sm-12 col-form-label">ইতিহাস</label>
                     <div class="col-sm-12">
                     <textarea type="text" name="history" id="description" class="form-control description" placeholder="Enter Insititute History " autocomplete="off" value="{{old('history')}}"></textarea>
                       <font style="color:red">{{($errors)->has('history')?($errors->first('history')):''}}</font>
@@ -139,19 +139,19 @@
                 </div>
 
 
-                <div class="form-group col-md-6">
+                {{-- <div class="form-group col-md-6">
                      <label for="mv"  class="col-sm-12 col-form-label">Insititute Mision Vission</label>
                  <div class="col-sm-12">
                     <textarea type="text" name="mv" id="title" class="form-control title" placeholder="Enter mv" autocomplete="off" value="{{old('mv')}}"></textarea>
                      <font style="color:red">{{($errors)->has('mv')?($errors->first('mv')):''}}</font>
                   </div>
-                </div>
+                </div> --}}
 
                 
                  
 
                   <div class="form-group col-md-6">
-                    <label for="structure"  class="col-sm-12 col-form-label">Insititute Structure</label>
+                    <label for="structure"  class="col-sm-12 col-form-label">প্রধান শিক্ষকের বাণী</label>
                     <div class="col-sm-12">
                     <textarea type="text" name="structure" id="description" class="form-control description" placeholder="Enter Insititute Structure " autocomplete="off" value="{{old('structure')}}"></textarea>
                       <font style="color:red">{{($errors)->has('structure')?($errors->first('structure')):''}}</font>
@@ -160,7 +160,7 @@
 
 
                 <div class="form-group col-md-6">
-                     <label for="infrastructure"  class="col-sm-12 col-form-label">Insititute Infrastructure</label>
+                     <label for="infrastructure"  class="col-sm-12 col-form-label">সম্পদ</label>
                  <div class="col-sm-12">
                     <textarea type="text" name="infrastructure" id="ins" class="form-control " placeholder="Enter Infrastructure" autocomplete="off" value="{{old('infrastructure')}}"></textarea>
                      <font style="color:red">{{($errors)->has('infrastructure')?($errors->first('infrastructure')):''}}</font>
@@ -170,13 +170,13 @@
                 
                  
 
-                  <div class="form-group col-md-6">
+                  {{-- <div class="form-group col-md-6">
                     <label for="purification"  class="col-sm-12 col-form-label">Insititute Purification</label>
                     <div class="col-sm-12">
                     <textarea type="text" name="purification" id="puri" class="form-control " placeholder="Enter Insititute Purification " autocomplete="off" value="{{old('purification')}}"></textarea>
                       <font style="color:red">{{($errors)->has('purification')?($errors->first('purification')):''}}</font>
                   </div>
-                </div>
+                </div> --}}
 
                 
        </div>
@@ -211,19 +211,18 @@
             <div class="row">
                   
 
-                  <div class="form-group col-md-6">
-                     <label for="about"  class="col-sm-12 col-form-label">Insititute About</label>
+                  {{-- <div class="form-group col-md-6">
+                     <label for="about"  class="col-sm-12 col-form-label">স্বীকৃতি</label>
                  <div class="col-sm-12">
                     <textarea type="text" name="about" id="about" class="form-control " placeholder="Enter About" autocomplete="off" >{{ $campus->about }}</textarea>
                      <font style="color:red">{{($errors)->has('about')?($errors->first('about')):''}}</font>
                   </div>
-                </div>
+                </div> --}}
 
                 
-                 
-
+                
                   <div class="form-group col-md-6">
-                    <label for="history"  class="col-sm-12 col-form-label">Insititute History</label>
+                    <label for="history"  class="col-sm-12 col-form-label">ইতিহাস</label>
                     <div class="col-sm-12">
                     <textarea type="text" name="history" id="description" class="form-control description" placeholder="Enter Insititute History " autocomplete="off" >{{ $campus->history }}</textarea>
                       <font style="color:red">{{($errors)->has('history')?($errors->first('history')):''}}</font>
@@ -231,19 +230,19 @@
                 </div>
 
 
-                <div class="form-group col-md-6">
+                {{-- <div class="form-group col-md-6">
                      <label for="mv"  class="col-sm-12 col-form-label">Insititute Mision Vission</label>
                  <div class="col-sm-12">
                     <textarea type="text" name="mv" id="title" class="form-control title" placeholder="Enter mv" autocomplete="off" >{{ $campus->mv }}</textarea>
                      <font style="color:red">{{($errors)->has('mv')?($errors->first('mv')):''}}</font>
                   </div>
-                </div>
+                </div> --}}
 
                 
                  
 
                   <div class="form-group col-md-6">
-                    <label for="structure"  class="col-sm-12 col-form-label">Insititute Structure</label>
+                    <label for="structure"  class="col-sm-12 col-form-label">প্রধান শিক্ষকের বাণী</label>
                     <div class="col-sm-12">
                     <textarea type="text" name="structure" id="description" class="form-control description" placeholder="Enter Insititute Structure " autocomplete="off" >{{ $campus->structure }}</textarea>
                       <font style="color:red">{{($errors)->has('structure')?($errors->first('structure')):''}}</font>
@@ -252,7 +251,7 @@
 
 
                 <div class="form-group col-md-6">
-                     <label for="infrastructure"  class="col-sm-12 col-form-label">Insititute Infrastructure</label>
+                     <label for="infrastructure"  class="col-sm-12 col-form-label">সম্পদ</label>
                  <div class="col-sm-12">
                     <textarea type="text" name="infrastructure" id="ins1" class="form-control " placeholder="Enter Infrastructure" autocomplete="off" >{{ $campus->infrastructure }}</textarea>
                      <font style="color:red">{{($errors)->has('infrastructure')?($errors->first('infrastructure')):''}}</font>
@@ -262,13 +261,13 @@
                 
                  
 
-                  <div class="form-group col-md-6">
+                  {{-- <div class="form-group col-md-6">
                     <label for="purification"  class="col-sm-12 col-form-label">Insititute Purification</label>
                     <div class="col-sm-12">
                     <textarea type="text" name="purification" id="puri1" class="form-control " placeholder="Enter Insititute Purification " autocomplete="off" >{{ $campus->purification }}</textarea>
                       <font style="color:red">{{($errors)->has('purification')?($errors->first('purification')):''}}</font>
                   </div>
-                </div>
+                </div> --}}
 
                 
        </div>

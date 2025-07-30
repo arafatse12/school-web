@@ -11,7 +11,7 @@
 	<hr>
   <div style="text-align: justify;">
             <p>{!!$campus->history!!}</p>
-        </div>
+	</div>
 
 
 </div>
