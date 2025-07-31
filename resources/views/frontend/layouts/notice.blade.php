@@ -16,11 +16,10 @@
     <div id="contents" class="sixteen columns">
         <div class="twelve columns" id="left-content">
             <div class="row mainwrapper">
-                {{-- <div class="pm">
-                                        <a href="https://www.youtube.com/watch?v=v1R-CB3e-pw" target="_blank">
-                        <img src="{{ asset('frontend') }}/assets/images/banner/National-Portal-Card-PM605c6e0b26125.jpg" width="100%" align="banner">
-                    </a>
-                </div> --}}
+                <div class="pm">
+                        <img src="{{ !empty($banner->image) ? asset('upload/banner/'.$banner->image) : asset('upload/banner/banner.jpg') }}" width="100%" alt="banner">
+                    
+                </div>
   
 <div class="scroll" style="height:40px;font-size:20px"> 
       

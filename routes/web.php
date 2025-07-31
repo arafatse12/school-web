@@ -44,6 +44,8 @@ Route::get('/structure', [App\Http\Controllers\Frontend\FrontendController::clas
 Route::get('/infrastructure', [App\Http\Controllers\Frontend\FrontendController::class, 'infrastructure'])->name('infrastructure');
 Route::get('/purification', [App\Http\Controllers\Frontend\FrontendController::class, 'purification'])->name('purification');
 
+Route::get('/holidays', [App\Http\Controllers\Frontend\HolidayController::class, 'index'])->name('holidays.index');
+Route::get('/academic-calendar', [App\Http\Controllers\Frontend\CalendarController::class, 'index'])->name('calendar');
 
 // ============Admission===============
 Route::get('/admission-apply-system', [App\Http\Controllers\Frontend\FrontendController::class, 'admissionSystem'])->name('admission.system');
@@ -100,6 +102,7 @@ Route::get('/honours', [App\Http\Controllers\Frontend\FrontendController::class,
 Route::get('/photo-gallery', [App\Http\Controllers\Frontend\FrontendController::class, 'photoGallery'])->name('photo.gallery');
 Route::get('/video-gallery', [App\Http\Controllers\Frontend\FrontendController::class, 'videoGallery'])->name('video.gallery');
 Route::get('/sikriti', [App\Http\Controllers\Frontend\FrontendController::class, 'sikritiList']);
+Route::get('/banner', [App\Http\Controllers\Frontend\FrontendController::class, 'bannerList']);
 
 
 
@@ -161,6 +164,14 @@ Route::get('student/class/delete/{id}',[App\Http\Controllers\admin\StudentClassC
     Route::post('sikriti/store', [App\Http\Controllers\admin\SikritiController::class, 'store'])->name('admin.sikriti.store');
     Route::post('sikriti/update/{id}', [App\Http\Controllers\admin\SikritiController::class, 'update'])->name('admin.sikriti.update');
     Route::get('sikriti/delete/{id}', [App\Http\Controllers\admin\SikritiController::class, 'delete'])->name('admin.sikriti.delete');
+
+
+        // ===================Banner Post===============
+
+    Route::get('banner/view', [App\Http\Controllers\admin\BannerController::class, 'view'])->name('admin.banner.view');
+    Route::post('banner/store', [App\Http\Controllers\admin\BannerController::class, 'store'])->name('admin.banner.store');
+    Route::post('banner/update/{id}', [App\Http\Controllers\admin\BannerController::class, 'update'])->name('admin.banner.update');
+    Route::get('banner/delete/{id}', [App\Http\Controllers\admin\BannerController::class, 'delete'])->name('admin.banner.delete');
 
     // ===================Student Post===============
      Route::get('post/view',[App\Http\Controllers\admin\PostController::class,'view'])->name('admin.post.view');

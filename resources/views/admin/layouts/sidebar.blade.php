@@ -115,7 +115,7 @@
             <a href="{{ route('admin.campus.view') }}" class="nav-link {{ request()->is('admin/campus/view') ? 'active' : '' }}">
               <i class="fas fa-campground mr-2"></i>
               <p>
-                বিদ্যালয়ের তথ্য
+                School Information
               </p>
             </a>
           </li>
@@ -124,7 +124,16 @@
             <a href="{{ route('admin.sikriti.view') }}" class="nav-link {{ request()->is('admin/sikriti/view') ? 'active' : '' }}">
               <i class="fas fa-campground mr-2"></i>
               <p>
-                স্বীকৃতি
+                Sikriti
+              </p>
+            </a>
+          </li>
+
+           <li class="nav-item">
+            <a href="{{ route('admin.banner.view') }}" class="nav-link {{ request()->is('admin/banner/view') ? 'active' : '' }}">
+              <i class="fas fa-place-of-worship mr-2"></i>
+              <p>
+                Home Banner
               </p>
             </a>
           </li>

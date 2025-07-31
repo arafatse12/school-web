@@ -14,7 +14,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-              <li class="breadcrumb-item active"> বিদ্যালয়ের তথ্য</li>
+              <li class="breadcrumb-item active"> School Information</li>
             </ol>
           </div>
         </div><!-- /.row -->
@@ -47,7 +47,7 @@
            
             <div class="pannel" style="background-color:white;border-bottom: 5px solid #605ca8 ;margin-bottom: 20px;">
              <div class="pannel-header" style="background-color: #605ca8;color: white;padding: 10px">
-                <h5> বিদ্যালয়ের তথ্য
+                <h5> School Information
                  <button type="button" class="btn btn-warning float-right btn" data-toggle="modal" data-target="#addCampus"><i class="fa fa-plus-circle"></i> Add Campus</button>
                 </h5>
               </div> 

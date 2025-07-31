@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Paper;
 use App\Models\Photo;
 use App\Models\Video;
+use App\Models\Banner;
 use App\Models\Campus;
 use App\Models\Course;
 use App\Models\Slider;
@@ -35,6 +36,7 @@ class FrontendController extends Controller
         $data['videos'] = Video::where('status',1)->orderBy('id','DESC')->limit(3)->get();
         $data['sliders'] = Slider::where('status',1)->orderBy('id','asc')->limit(5)->get();
         $data['setting'] = Setting::where('status',1)->first();
+        $data['banner'] = Banner::orderBy('id','asc')->first();
         return View('frontend.layouts.home',$data);
     }
 

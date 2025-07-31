@@ -19,7 +19,7 @@
 
     <div style="padding:10px;font-size:20px;font-weight:bold"> টেলিফোন :  {{ $contact->phone }}</div>
 
-    <div style="padding:10px;font-size:20px;font-weight:bold"> ওয়েবসাইট :  <a href="http://www.tcplmc.com">www.tcplmc.com</a></div>
+    {{-- <div style="padding:10px;font-size:20px;font-weight:bold"> ওয়েবসাইট :  <a href="{{ config('app.url') }}">{{ config('app.url') }}</a></div> --}}
 
 
     <div style="padding-top: 50px"><iframe src="{{ $contact->map }}" width="700" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div> 

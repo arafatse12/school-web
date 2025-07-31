@@ -14,7 +14,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-              <li class="breadcrumb-item active">Sikriti</li>
+              <li class="breadcrumb-item active">Banner</li>
             </ol>
           </div>
         </div><!-- /.row -->
@@ -47,8 +47,10 @@
            
             <div class="pannel" style="background-color:white;border-bottom: 5px solid #605ca8 ;margin-bottom: 20px;">
              <div class="pannel-header" style="background-color: #605ca8;color: white;padding: 10px">
-                <h5>Sikriti
-                 <button type="button" class="btn btn-warning float-right btn" data-toggle="modal" data-target="#addClass"><i class="fa fa-plus-circle"></i>Sikriti Added</button>
+                <h5>Banner
+                   @if(empty($banner))
+                 <button type="button" class="btn btn-warning float-right btn" data-toggle="modal" data-target="#addClass"><i class="fa fa-plus-circle"></i>Banner Added</button>
+                 @endif
                 </h5>
               </div> 
             <div class="card-body">
@@ -56,26 +58,27 @@
                   <thead>
                   <tr style="background-color: #001f3f;color: white">
                     <th>SL</th>
-                    <th>Title</th>
                     <th>Image</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                    
-                    @foreach($alldata as $key => $class)
+                     @if(!empty($banner))
                     <tr>
-                      <td>{{$key+1}}</td>
-                      <td>{{$class->title}}</td>
-                      <td ><img src="{{asset('upload/sikriti/'.$class->image)}}" alt="" height="300" width="300"></td>
+                      <td>1</td>
+                      <td ><img src="{{asset('upload/banner/'.$banner->image)}}" alt="" height="300" width="300"></td>
                      
                     <td> 
-                     <button type="button" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#editClass-{{ $class->id }}"><i class="fa fa-edit"></i></button>
+                     <button type="button" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#editClass-{{ $banner->id }}"><i class="fa fa-edit"></i></button>
 
-                    <a title="Delete" id="delete" href="{{route('admin.sikriti.delete',$class->id)}}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                    <a title="Delete" id="delete" href="{{route('admin.banner.delete',$banner->id)}}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
                       </td> 
                     </tr>
-                    @endforeach
+                    @else
+                    <tr>
+                        <td colspan="3" class="text-center text-muted">No data found</td>
+                    </tr>
+                    @endif
                   </tbody>
                 </table>
                 </div>
@@ -99,21 +102,15 @@
         <div class="modal-dialog modal-small">
           <div class="modal-content"style="background-color:#d9dad6;border-bottom: 5px solid #605ca8 ;">
             <div class="modal-header " style="background-color: #605ca8;color: white;padding: 10px">
-              <h4 class="modal-title">Sikriti Add</h4>
+              <h4 class="modal-title">Banner Add</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
             </div>
             <div class="modal-body">
-            <form method="post" action="{{route('admin.sikriti.store')}}"  enctype="multipart/form-data">
+            <form method="post" action="{{route('admin.banner.store')}}"  enctype="multipart/form-data">
                 @csrf
-                  <div class="form-group row">
-                     <label for="title"  class="col-sm-4 col-form-label">Title</label>
-                 <div class="col-sm-8">
-                    <input type="text" name="title" id="title1" class="form-control" placeholder="Enter title">
-                     <font style="color:red">{{($errors)->has('title')?($errors->first('title')):''}}</font>
-                  </div>
-                </div>
+                  
 
                 <div class="form-group row">
                      <label for="image"  class="col-sm-4 col-form-label">Image</label>
@@ -125,7 +122,7 @@
 
               <div class="modal-footer ">
                  <button type="button" class="btn btn-danger "  data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success ">Sikriti Added</button>
+                <button type="submit" class="btn btn-success ">Banner Added</button>
              
             </div>
             </form>
@@ -142,27 +139,19 @@
         <div class="modal-dialog modal-small">
           <div class="modal-content"style="background-color:#d9dad6;border-bottom: 5px solid #605ca8 ;">
             <div class="modal-header " style="background-color: #605ca8;color: white;padding: 10px">
-              <h4 class="modal-title">Sikriti Edit </h4>
+              <h4 class="modal-title">Banner Edit </h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
             </div>
             <div class="modal-body">
-            <form method="post" action="{{route('admin.sikriti.update',$class->id)}}" id="myform2" enctype="multipart/form-data">
+            <form method="post" action="{{route('admin.banner.update',$class->id)}}" id="myform2" enctype="multipart/form-data">
                 @csrf
-                
-                <div class="form-group row">
-                     <label for="title"  class="col-sm-4 col-form-label">Title</label>
-                 <div class="col-sm-8">
-                    <input type="text" name="title" id="title" class="form-control" placeholder="Enter title"  value="{{$class->title}}">
-                     <font style="color:red">{{($errors)->has('title')?($errors->first('title')):''}}</font>
-                  </div>
-                </div>
 
                 <div class="form-group row">
                      <label for="image"  class="col-sm-4 col-form-label">Image</label>
                  <div class="col-sm-8">
-                    <img src="{{asset('upload/sikriti/'.$class->image)}}" alt="" height="100" width="100">
+                    <img src="{{asset('upload/banner/'.$class->image)}}" alt="" height="100" width="100">
                     <input type="file" name="image" id="image" class="form-control"  >
                      <font style="color:red">{{($errors)->has('title')?($errors->first('image')):''}}</font>
                   </div>
@@ -170,7 +159,7 @@
 
               <div class="modal-footer ">
                  <button type="button" class="btn btn-danger "  data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-warning ">Update Class</button>
+                <button type="submit" class="btn btn-warning ">Update Banner</button>
              
             </div>
             </form>
