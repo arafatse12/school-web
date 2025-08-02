@@ -392,8 +392,16 @@ class FrontendController extends Controller
         $data['setting'] = Setting::where('status',1)->first();
         $data['student'] = St::first();
         $data['students'] = User::where('role_id', 3)
-            ->orderBy('class','desc')
+            ->orderByRaw("FIELD(class, 'Six', 'Seven', 'Eight', 'Nine', 'Ten')")
+            ->orderByRaw("FIELD(section_name, '1', '2', '3', '4', '5', '6')")
             ->paginate(20);
+    
+        // $$data['students'] = User::where('role_id', 3)
+        //         ->orderBy('class', 'asc')
+        //         ->orderBy('section_name', 'asc')
+        //         ->paginate(20)
+        //         ->groupBy(['class', 'section_name']);
+
 
     return View('frontend.single.student.our-student',$data);
 
