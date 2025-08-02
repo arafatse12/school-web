@@ -19,6 +19,7 @@ use App\Models\Sikriti;
 use App\Models\Academic;
 use App\Models\Resource;
 use App\Models\Admission;
+use App\Models\Committee;
 use App\Models\Principal;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -164,6 +165,14 @@ class FrontendController extends Controller
         $data['setting'] = Setting::where('status',1)->first();
         $data['sikrities'] = Sikriti::orderBy('id','asc')->paginate(20);
         return View('frontend.single.academic.sikriti',$data);
+    }
+
+    public function committeeList(){
+        $data['principals'] = Principal::all();
+        $data['sliders'] = Slider::where('status',1)->orderBy('id','asc')->limit(5)->get();
+        $data['setting'] = Setting::where('status',1)->first();
+        $data['committees'] = Committee::orderBy('id','asc')->paginate(20);
+        return View('frontend.single.academic.committee',$data);
     }
 
      public function history(){
@@ -388,7 +397,47 @@ class FrontendController extends Controller
 
     return View('frontend.single.student.our-student',$data);
 
-    } public function studentSuccess(){
+    }
+
+    public function totalOurStudent()
+    {
+        $data['principals'] = Principal::all();
+        $data['sliders'] = Slider::where('status', 1)->orderBy('id', 'asc')->limit(5)->get();
+        $data['setting'] = Setting::where('status', 1)->first();
+        $data['student'] = St::first();
+
+        $students = User::where('role_id', 3)->orderBy('class', 'desc')->get();
+
+        $grouped = [];
+        $grandTotal = 0;
+
+        foreach ($students as $student) {
+            $class = $student->class ?? 'Unknown';
+            $section = $student->section_name ?? '';
+
+            if (!isset($grouped[$class])) {
+                $grouped[$class] = [
+                    'sections' => [],
+                    'total' => 0,
+                ];
+            }
+
+            if (!isset($grouped[$class]['sections'][$section])) {
+                $grouped[$class]['sections'][$section] = 0;
+            }
+
+            $grouped[$class]['sections'][$section]++;
+            $grouped[$class]['total']++;
+            $grandTotal++;
+        }
+
+        $data['grouped_students'] = $grouped;
+        $data['grand_total'] = $grandTotal;
+
+        return view('frontend.single.student.total-our-student', $data);
+    }
+     
+    public function studentSuccess(){
         $data['principals'] = Principal::all();
         $data['sliders'] = Slider::where('status',1)->orderBy('id','asc')->limit(5)->get();
         $data['setting'] = Setting::where('status',1)->first();

@@ -41,8 +41,9 @@
                     <td width="20%">Name</td>
                     <td width="10%">Mobile</td>
                     <td width="10%">Class</td>
+                    <td width="10%">Section</td>
                     <td width="10%">Roll No</td>
-                    <td width="20%">Address</td>
+                    <td width="10%">Address</td>
                     <td width="20%">Image</td>
                 </tr>
                 </thead>
@@ -59,6 +60,9 @@
 
 				    <td>
                       {{ $student->class }}
+				   </td>
+                   <td>
+                      {{ $student->section_name }}
 				   </td>
 				    <td>
                       {{ $student->roll }}

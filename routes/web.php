@@ -79,6 +79,7 @@ Route::get('/uniform', [App\Http\Controllers\Frontend\FrontendController::class,
 Route::get('/exam-manage', [App\Http\Controllers\Frontend\FrontendController::class, 'examManage'])->name('exam-manage');
 Route::get('/student-rules', [App\Http\Controllers\Frontend\FrontendController::class, 'studentRules'])->name('student-rules');
 Route::get('/our-student', [App\Http\Controllers\Frontend\FrontendController::class, 'ourStudent'])->name('our-student');
+Route::get('/total-our-student', [App\Http\Controllers\Frontend\FrontendController::class, 'totalOurStudent'])->name('total-our-student');
 Route::get('/student-success', [App\Http\Controllers\Frontend\FrontendController::class, 'studentSuccess'])->name('student-success');
 
 
@@ -103,6 +104,7 @@ Route::get('/photo-gallery', [App\Http\Controllers\Frontend\FrontendController::
 Route::get('/video-gallery', [App\Http\Controllers\Frontend\FrontendController::class, 'videoGallery'])->name('video.gallery');
 Route::get('/sikriti', [App\Http\Controllers\Frontend\FrontendController::class, 'sikritiList']);
 Route::get('/banner', [App\Http\Controllers\Frontend\FrontendController::class, 'bannerList']);
+Route::get('/committee', [App\Http\Controllers\Frontend\FrontendController::class, 'committeeList']);
 
 
 
@@ -164,6 +166,13 @@ Route::get('student/class/delete/{id}',[App\Http\Controllers\admin\StudentClassC
     Route::post('sikriti/store', [App\Http\Controllers\admin\SikritiController::class, 'store'])->name('admin.sikriti.store');
     Route::post('sikriti/update/{id}', [App\Http\Controllers\admin\SikritiController::class, 'update'])->name('admin.sikriti.update');
     Route::get('sikriti/delete/{id}', [App\Http\Controllers\admin\SikritiController::class, 'delete'])->name('admin.sikriti.delete');
+
+
+    Route::get('committee/view', [App\Http\Controllers\admin\CommitteeController::class, 'view'])->name('admin.committee.view');
+    Route::post('committee/store', [App\Http\Controllers\admin\CommitteeController::class, 'store'])->name('admin.committee.store');
+    Route::post('committee/update/{id}', [App\Http\Controllers\admin\CommitteeController::class, 'update'])->name('admin.committee.update');
+    Route::get('committee/delete/{id}', [App\Http\Controllers\admin\CommitteeController::class, 'delete'])->name('admin.committee.delete');
+
 
 
         // ===================Banner Post===============

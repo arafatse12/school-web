@@ -58,6 +58,7 @@
                     <th>SL</th>
                     <th>Student Roll</th>
                     <th>Class</th>
+                    <th>Section</th>
                     <th>Name</th>
                     <th>Mobile</th>
                     <th>Address</th>
@@ -72,6 +73,7 @@
                       <td>{{$key+1}}</td>
                       <td>{{$user->roll}}</td>
                       <td>{{$user->class}}</td>
+                      <td>{{$user->section_name}}</td>
                       <td>{{$user->name}}</td>
                       <td>{{$user->mobile}}</td>
                       <td>{{$user->address}}</td>
@@ -130,8 +132,15 @@
             <div class="modal-body">
             <form method="post" action="{{route('admin.student.store')}}" id="myform" enctype="multipart/form-data">
                 @csrf
-                
-                  <div class="form-group row" hidden>
+                  <div class="form-group row">
+                     <label for="name"  class="col-sm-3 col-form-label">Name</label>
+                 <div class="col-sm-9">
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name" autocomplete="off" value="{{old('name')}}">
+                     <font style="color:red">{{($errors)->has('name')?($errors->first('name')):''}}</font>
+                  </div>
+                </div>
+
+                <div class="form-group row" hidden>
                       <label for="role_id" class="col-sm-3 col-form-label">Role Name</label>
                       <div class="col-sm-9">
                           <select name="role_id" id="role_id" class="form-control" autocomplete="off">
@@ -147,15 +156,6 @@
                       </div>
                   </div>
 
-
-                  <div class="form-group row">
-                     <label for="name"  class="col-sm-3 col-form-label">Name</label>
-                 <div class="col-sm-9">
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name" autocomplete="off" value="{{old('name')}}">
-                     <font style="color:red">{{($errors)->has('name')?($errors->first('name')):''}}</font>
-                  </div>
-                </div>
-
                  <div class="form-group row">
                     <label for="class"  class="col-sm-3 col-form-label">Class</label>
                     <div class="col-sm-9">
@@ -170,14 +170,6 @@
                       <font style="color:red">{{($errors)->has('class')?($errors->first('class')):''}}</font>
                   </div>
                 </div>
-                 <div class="form-group row">
-                    <label for="roll"  class="col-sm-3 col-form-label">Roll No</label>
-                    <div class="col-sm-9">
-                    <input type="text" name="roll" id="roll" class="form-control" placeholder="Roll No" autocomplete="off" value="{{old('roll')}}">
-                      <font style="color:red">{{($errors)->has('roll')?($errors->first('roll')):''}}</font>
-                  </div>
-                </div>
-
                 {{-- <div class="form-group row">
                     <label for="email"  class="col-sm-3 col-form-label">Email</label>
                     <div class="col-sm-9">
@@ -185,6 +177,30 @@
                     <font style="color:red">{{($errors)->has('email')?($errors->first('email')):''}}</font>
                   </div>
                 </div> --}}
+
+                <div class="form-group row">
+                   <label for="section_name"  class="col-sm-3 col-form-label">Section Name</label>
+                    <div class="col-sm-9">
+                    <select name="section_name" class="form-control" id="section_name">
+                        <option value="">-- Select --</option>
+                        @php
+                            $sections = ['None', 'Section 1', 'Section 2', 'Section 3', 'Section 4', 'Section 5', 'Section 6'];
+                        @endphp
+                        @foreach($sections as $section)
+                            <option value="{{ $section }}">{{ $section }}</option>
+                        @endforeach
+                    </select>
+                   <font style="color:red">{{($errors)->has('section_name')?($errors->first('section_name')):''}}</font>
+                </div>
+              </div>
+
+               <div class="form-group row">
+                    <label for="roll"  class="col-sm-3 col-form-label">Roll No</label>
+                    <div class="col-sm-9">
+                    <input type="text" name="roll" id="roll" class="form-control" placeholder="Roll No" autocomplete="off" value="{{old('roll')}}">
+                      <font style="color:red">{{($errors)->has('roll')?($errors->first('roll')):''}}</font>
+                  </div>
+                </div>
 
                 <div class="form-group row">
                     <label for="mobile"  class="col-sm-3 col-form-label">Mobile</label>
@@ -258,12 +274,25 @@
                     </select>
                      <font style="color:red">{{($errors)->has('class')?($errors->first('class')):''}}</font>
                   </div>
-                   </div>
-
-
-                 
-
+                </div>
                 <div class="form-group row">
+                  <label for="section_name" class="col-sm-3 col-form-label">Section Name</label>
+                  <div class="col-sm-9">
+                      <select name="section_name" class="form-control" id="section_name">
+                          <option value="">-- Select --</option>
+                          @php
+                              $sections = ['None', 'Section 1', 'Section 2', 'Section 3', 'Section 4', 'Section 5', 'Section 6'];
+                          @endphp
+                          @foreach($sections as $section)
+                              <option value="{{ $section }}" {{ ($user->section_name == $section) ? 'selected' : '' }}>
+                                  {{ $section }}
+                              </option>
+                          @endforeach
+                      </select>
+                      <font style="color:red">{{ ($errors)->has('section_name') ? $errors->first('section_name') : '' }}</font>
+                  </div>
+              </div>
+               <div class="form-group row">
                     <label for="roll"  class="col-sm-3 col-form-label">Roll No</label>
                     <div class="col-sm-9">
                     <input type="text" name="roll" id="roll" class="form-control" placeholder="Roll No" autocomplete="off" value="{{ $user->roll }}" >

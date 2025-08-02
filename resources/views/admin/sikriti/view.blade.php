@@ -110,7 +110,7 @@
                   <div class="form-group row">
                      <label for="title"  class="col-sm-4 col-form-label">Title</label>
                  <div class="col-sm-8">
-                    <input type="text" name="title" id="title1" class="form-control" placeholder="Enter title">
+                    <input type="text" name="title" id="title" class="form-control" placeholder="Enter title">
                      <font style="color:red">{{($errors)->has('title')?($errors->first('title')):''}}</font>
                   </div>
                 </div>

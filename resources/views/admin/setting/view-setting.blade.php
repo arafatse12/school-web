@@ -57,7 +57,7 @@
                 <table id="example1" class="table  table-hover table-sm">
                   <thead>
                   <tr style="background-color: #001f3f;color: white">
-                     <th>College Name</th>
+                     <th>School Name</th>
                      <th>Email</th>
                      <th>Mobile</th>
                      <th>Address</th>
@@ -132,41 +132,41 @@
 
 <div class="row">
                   <div class="form-group col-md-6">
-                    <label for="college_name"  class="col-sm-12 col-form-label">College Name</label>
+                    <label for="college_name"  class="col-sm-12 col-form-label">School Name</label>
                     <div class="col-sm-12">
-                    <input type="text" name="college_name" id="setting_college_name" class="form-control " placeholder="Enter College Name"  autocomplete="off" value="{{old('college_name')}}">
+                    <input type="text" name="college_name" id="setting_college_name" class="form-control " placeholder="Enter School Name"  autocomplete="off" value="{{old('college_name')}}">
                     <font style="color:red">{{($errors)->has('college_name')?($errors->first('college_name')):''}}</font>
                   </div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="email"  class="col-sm-12 col-form-label">College Email</label>
+                    <label for="email"  class="col-sm-12 col-form-label">School Email</label>
                     <div class="col-sm-12">
-                    <input type="text" name="email" id="setting_email" class="form-control " placeholder="Enter College Email"  autocomplete="off" value="{{old('email')}}">
+                    <input type="text" name="email" id="setting_email" class="form-control " placeholder="Enter School Email"  autocomplete="off" value="{{old('email')}}">
                     <font style="color:red">{{($errors)->has('email')?($errors->first('email')):''}}</font>
                   </div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="mobile"  class="col-sm-12 col-form-label">College Mobile</label>
+                    <label for="mobile"  class="col-sm-12 col-form-label">School Mobile</label>
                     <div class="col-sm-12">
-                    <input type="text" name="mobile" id="setting_mobile" class="form-control " placeholder="Enter College Mobile"  autocomplete="off" value="{{old('mobile')}}">
+                    <input type="text" name="mobile" id="setting_mobile" class="form-control " placeholder="Enter School Mobile"  autocomplete="off" value="{{old('mobile')}}">
                     <font style="color:red">{{($errors)->has('mobile')?($errors->first('mobile')):''}}</font>
                   </div>
                 </div>
 
                  <div class="form-group col-md-6">
-                    <label for="address"  class="col-sm-12 col-form-label">College Address</label>
+                    <label for="address"  class="col-sm-12 col-form-label">School Address</label>
                     <div class="col-sm-12">
-                    <input type="text" name="address" id="address" class="form-control " placeholder="Enter College Address"  autocomplete="off" value="{{old('address')}}">
+                    <input type="text" name="address" id="address" class="form-control " placeholder="Enter School Address"  autocomplete="off" value="{{old('address')}}">
                     <font style="color:red">{{($errors)->has('address')?($errors->first('address')):''}}</font>
                   </div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="slogan"  class="col-sm-12 col-form-label">College Slogan</label>
+                    <label for="slogan"  class="col-sm-12 col-form-label">School Slogan</label>
                     <div class="col-sm-12">
-                    <input type="text" name="slogan" id="slogan" class="form-control " placeholder="Enter College Slogan"  autocomplete="off" value="{{old('slogan')}}">
+                    <input type="text" name="slogan" id="slogan" class="form-control " placeholder="Enter School Slogan"  autocomplete="off" value="{{old('slogan')}}">
                     <font style="color:red">{{($errors)->has('slogan')?($errors->first('slogan')):''}}</font>
                   </div>
                 </div>
@@ -217,33 +217,33 @@
                   
 
                   <div class="form-group col-md-6">
-                    <label for="college_name"  class="col-sm-12 col-form-label">College Name</label>
+                    <label for="college_name"  class="col-sm-12 col-form-label">School Name</label>
                     <div class="col-sm-12">
-                    <input type="text" name="college_name" id="setting_college_name" class="form-control " placeholder="Enter College Name"  autocomplete="off" value="{{$setting->college_name}}">
+                    <input type="text" name="college_name" id="setting_college_name" class="form-control " placeholder="Enter School Name"  autocomplete="off" value="{{$setting->college_name}}">
                     <font style="color:red">{{($errors)->has('college_name')?($errors->first('college_name')):''}}</font>
                   </div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="email"  class="col-sm-12 col-form-label">College Email</label>
+                    <label for="email"  class="col-sm-12 col-form-label">School Email</label>
                     <div class="col-sm-12">
-                    <input type="text" name="email" id="setting_email" class="form-control " placeholder="Enter College Email"  autocomplete="off" value="{{$setting->email}}">
+                    <input type="text" name="email" id="setting_email" class="form-control " placeholder="Enter School Email"  autocomplete="off" value="{{$setting->email}}">
                     <font style="color:red">{{($errors)->has('email')?($errors->first('email')):''}}</font>
                   </div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="mobile"  class="col-sm-12 col-form-label">College Mobile</label>
+                    <label for="mobile"  class="col-sm-12 col-form-label">School Mobile</label>
                     <div class="col-sm-12">
-                    <input type="text" name="mobile" id="setting_mobile" class="form-control " placeholder="Enter College Mobile"  autocomplete="off" value="{{$setting->mobile}}">
+                    <input type="text" name="mobile" id="setting_mobile" class="form-control " placeholder="Enter School Mobile"  autocomplete="off" value="{{$setting->mobile}}">
                     <font style="color:red">{{($errors)->has('mobile')?($errors->first('mobile')):''}}</font>
                   </div>
                 </div>
 
                  <div class="form-group col-md-6">
-                    <label for="address"  class="col-sm-12 col-form-label">College Address</label>
+                    <label for="address"  class="col-sm-12 col-form-label">School Address</label>
                     <div class="col-sm-12">
-                    <input type="text" name="address" id="address" class="form-control " placeholder="Enter College Address"  autocomplete="off" value="{{$setting->address}}">
+                    <input type="text" name="address" id="address" class="form-control " placeholder="Enter School Address"  autocomplete="off" value="{{$setting->address}}">
                     <font style="color:red">{{($errors)->has('address')?($errors->first('address')):''}}</font>
                   </div>
                 </div>
@@ -324,9 +324,9 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="slogan"  class="col-sm-12 col-form-label">College Slogan</label>
+                    <label for="slogan"  class="col-sm-12 col-form-label">School Slogan</label>
                     <div class="col-sm-12">
-                    <input type="text" name="slogan" id="slogan" class="form-control " placeholder="Enter College Slogan"  autocomplete="off" value="{{$setting->slogan}}">
+                    <input type="text" name="slogan" id="slogan" class="form-control " placeholder="Enter School Slogan"  autocomplete="off" value="{{$setting->slogan}}">
                     <font style="color:red">{{($errors)->has('slogan')?($errors->first('slogan')):''}}</font>
                   </div>
                 </div>

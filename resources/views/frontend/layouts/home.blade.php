@@ -157,26 +157,31 @@
     <div class="card">
         <img src="{{ asset('frontend/assets/images/icon/campus.png') }}" alt="ক্যাম্পাস">
         <div class="card-body">
-            <h4>ক্যাম্পাস</h4>
+            <h4>বিদ্যালয়ের তথ্য</h4>
             <ul>
                 <li><a href="{{ route('history') }}">ইতিহাস</a></li>
-                <li><a href="{{ route('structure') }}">প্রাতিষ্ঠানিক কাঠামো</a></li>
-                <li><a href="{{ route('infrastructure') }}">প্রাতিষ্ঠানিক অবকাঠামো</a></li>
-                <li><a href="{{ route('purification') }}">শুদ্ধাচার সংক্রান্ত তথ্য</a></li>
+                <li><a href="{{ route('structure') }}">প্রধান শিক্ষকের বাণী</a></li>
+                <li><a href="{{ route('infrastructure') }}">সম্পদ</a></li>
+                <li><a href="{{ route('teacher') }}">শিক্ষক</a></li>
+                <li><a href="{{ url('/sikriti') }}">স্বীকৃতি</a></li>
+                <li><a href="{{ route('our-student') }}">ছাত্র-ছাত্রী</a></li>
+                <li><a href="{{ url('principal-details/1') }}">প্রতিষ্ঠাতা</a></li>
+                <li><a href="{{ url('/committee') }}">কমিটি </a></li>
             </ul>
         </div>
     </div>
 
     {{-- ভর্তি --}}
     <div class="card">
-        <img src="{{ asset('frontend/assets/images/icon/admission512x512.png') }}" alt="ভর্তি">
+        <img src="{{ asset('frontend/assets/images/icon/admission512x512.png') }}" alt="কার্যাবলী">
         <div class="card-body">
-            <h4>ভর্তি</h4>
+            <h4>কার্যাবলী</h4>
             <ul>
-                <li><a href="{{ route('admission.exam') }}">ভর্তি পরীক্ষা</a></li>
-                <li><a href="{{ route('admission.rules') }}">ভর্তি নীতি</a></li>
-                <li><a href="{{ route('registration') }}">রেজিস্ট্রেশন সিস্টেম</a></li>
-                <li><a href="{{ route('curricullam') }}">বর্তমান শিক্ষা ব্যবস্থা</a></li>
+                <li><a href="{{ route('class-routine') }}">পরীক্ষার রুটিন</a></li>
+                <li><a href="{{ route('academic-syllabus') }}">একাডেমিক সিলেবাস</a></li>
+                <li><a href="{{ route('calendar') }}">শিক্ষা বর্ষপঞ্জি</a></li>
+                <li><a href="{{ route('class-routine') }}">ক্লাস রুটিন</a></li>
+                <li><a href="{{ route('our-student') }}">উপস্থিতি</a></li>
             </ul>
         </div>
     </div>
@@ -185,28 +190,31 @@
     <div class="card">
         <img src="{{ asset('frontend/assets/images/icon/scholarship.png') }}" alt="একাডেমিক">
         <div class="card-body">
-            <h4>একাডেমিক</h4>
+            <h4>একাডেমিক রেকর্ড</h4>
             <ul>
-                <li><a href="{{ route('founder') }}">প্রতিষ্ঠাতা</a></li>
-                <li><a href="{{ route('teacher') }}">শিক্ষক</a></li>
-                <li><a href="{{ route('office') }}">অফিস</a></li>
-                <li><a href="{{ route('stuff') }}">কর্মচারী</a></li>
+                <li><a href="http://www.educationboardresults.gov.bd/"><span>পাবলিক পরীক্ষা</span></a></li>
+                <li><a href="{{ route('admission.rules') }}"><span>ভর্তি পরীক্ষা</span></a></li>
+                {{-- <li><a href="#"><span>সাময়িক পরীক্ষা</span></a></li>
+                <li><a href="#"><span>টিউটরিয়াল পরীক্ষা</span></a></li>
+                <li><a href="#"><span>কুইজ টেস্ট</span></a></li> --}}
+                <li><a href="{{ route('curricullam') }}">বর্তমান শিক্ষা ব্যবস্থা</a></li>
+                <li><a href="{{ route('tution') }}">শিক্ষার্থীদের বেতন</a></li>
+                <li><a href="{{ route('student-success') }}">শিক্ষার্থীদের সাফল্যের গল্প</a></li>
+                <li><a href="{{ route('admission.notice') }}">ভর্তি নোটিশ</a></li>
+                <li><a href="{{ route('exam.notice') }}">পরীক্ষার নোটিশ</a></li>
+                <li><a href="{{ route('result.notice') }}">ফলাফলের নোটিশ</a></li>
             </ul>
         </div>
     </div>
 
     {{-- একাডেমিক পেপার --}}
     <div class="card">
-        <img src="{{ asset('frontend/assets/images/icon/academic_paper.png') }}" alt="একাডেমিক পেপার">
+        <img src="{{ asset('frontend/assets/images/icon/academic_paper.png') }}" alt="রেজাল্ট ও এডমিন কার্ড">
         <div class="card-body">
-            <h4>একাডেমিক পেপার</h4>
+            <h4>রেজাল্ট ও এডমিন কার্ড</h4>
             <ul>
-                <li><a href="{{ route('class-routine') }}">শ্রেণীসূচি</a></li>
-                <li><a href="{{ route('online-class-routine') }}">অনলাইন শ্রেণীসূচি</a></li>
-                <li><a href="{{ route('class-routine') }}">পরীক্ষার সময়সূচি</a></li>
-                <li><a href="{{ route('academic-syllabus') }}">একাডেমিক সিলেবাস</a></li>
-                <li><a href="{{ route('calendar') }}">শিক্ষা বর্ষপঞ্জি</a></li>
-                <li><a href="{{ route('prospectus') }}">একাডেমিক প্রসপেক্টাস</a></li>
+                    <li><a href="http://www.educationboardresults.gov.bd/">বোর্ড পরীক্ষার ফলাফল</a></li>
+
             </ul>
         </div>
     </div>
@@ -215,7 +223,7 @@
     <div class="card">
         <img src="{{ asset('frontend/assets/images/icon/Examination_ex.png') }}" alt="শিক্ষার্থী">
         <div class="card-body">
-            <h4>শিক্ষার্থী</h4>
+            <h4>ক্রিয়াকলাপ</h4>
             <ul>
                 <li><a href="{{ route('tution') }}">শিক্ষার্থীদের বেতন</a></li>
                 <li><a href="{{ route('exam-manage') }}">পরীক্ষার ব্যবস্থা</a></li>
@@ -224,56 +232,7 @@
         </div>
     </div>
 
-    {{-- ফলাফল --}}
-    <div class="card">
-        <img src="{{ asset('frontend/assets/images/icon/GPA-512.png') }}" alt="ফলাফল">
-        <div class="card-body">
-            <h4>ফলাফল</h4>
-            <ul>
-                <li><a href="{{ route('result.notice') }}">একাডেমিক পরীক্ষার ফলাফল</a></li>
-                <li><a target="_blank" href="https://eboardresults.com/v2/home">বোর্ড পরীক্ষার ফলাফল</a></li>
-            </ul>
-        </div>
-    </div>
 
-    {{-- নোটিশ --}}
-    <div class="card">
-        <img src="{{ asset('frontend/assets/images/icon/notice%26download.png') }}" alt="নোটিশ">
-        <div class="card-body">
-            <h4>নোটিশ</h4>
-            <ul>
-                <li><a href="{{ route('admission.notice') }}">ভর্তি নোটিশ</a></li>
-                <li><a href="{{ route('exam.notice') }}">পরীক্ষার নোটিশ</a></li>
-                <li><a href="{{ route('result.notice') }}">ফলাফলের নোটিশ</a></li>
-                <li><a href="{{ route('event.notice') }}">ইভেন্টস নোটিশ</a></li>
-                <li><a href="{{ route('admin.notice') }}">প্রশাসন নোটিশ</a></li>
-                <li><a href="{{ route('national.notice') }}">জাতীয় কর্মসূচী</a></li>
-            </ul>
-        </div>
-    </div>
-
-    {{-- কোর্সসমূহ --}}
-    <div class="card">
-        <img src="{{ asset('frontend/assets/images/icon/course-list.png') }}" alt="কোর্সসমূহ">
-        <div class="card-body">
-            <h4>কোর্সসমূহ</h4>
-            <ul>
-                <li><a href="{{ route('high') }}">৬ষ্ঠ - দশম</a></li>
-            </ul>
-        </div>
-    </div>
-
-    {{-- বৃত্তি ও উপবৃত্তি --}}
-    <div class="card">
-        <img src="{{ asset('frontend/assets/images/icon/notice%26download.png') }}" alt="বৃত্তি ও উপবৃত্তি">
-        <div class="card-body">
-            <h4>বৃত্তি ও উপবৃত্তি</h4>
-            <ul>
-                <li><a href="{{ route('schollar.notice') }}">বৃত্তি সংক্রান্ত নোটিশ</a></li>
-                <li><a href="{{ route('stipend.notice') }}">উপবৃত্তি সংক্রান্ত নোটিশ</a></li>
-            </ul>
-        </div>
-    </div>
 
     {{-- যোগাযোগ --}}
     <div class="card">
@@ -288,20 +247,6 @@
         </div>
     </div>
 
-    {{-- রিসোর্স --}}
-    <div class="card">
-        <img src="{{ asset('frontend/assets/images/icon/resources-.png') }}" alt="রিসোর্স">
-        <div class="card-body">
-            <h4>রিসোর্স</h4>
-            <ul>
-                <li><a href="{{ route('class-content') }}">ডিজিটাল ক্লাস কনটেন্ট</a></li>
-                <li><a href="{{ route('library') }}">গ্রন্থাগার</a></li>
-                <li><a href="{{ route('labrotory') }}">গবেষণাগার</a></li>
-                <li><a href="{{ route('sports-yard') }}">খেলার মাঠ</a></li>
-                <li><a href="{{ route('co-education') }}">সহ-পাঠক্রম সংক্রান্ত কার্যক্রম</a></li>
-            </ul>
-        </div>
-    </div>
 
     {{-- গ্যালারী --}}
     <div class="card">

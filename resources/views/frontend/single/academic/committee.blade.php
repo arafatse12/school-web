@@ -7,7 +7,7 @@
 	<div class="twelve columns" id="left-content">
 	<br>
 	
-	<h4 style="font-weight: bold;">Sikriti :</h4>
+	<h4 style="font-weight: bold;">Committee :</h4>
 	<hr>
   		{{-- <div style="text-align: justify;">
             <p>{!!$academic->teacher!!}</p>
@@ -33,7 +33,7 @@
 		}
 	</style>
 
-    @if($sikrities->isEmpty())
+    @if($committees->isEmpty())
      <h4 style="color:red">Data Not Found!!!</h4>
       @else
 
@@ -41,20 +41,32 @@
                 <thead>
                 <tr style="background-color: #001f3f;color: white;font-weight:bold;">
                     <td width="10%">Sl</td>
-                    <td width="20%">Title</td>
+                    <td width="20%">Name</td>
+                    <td width="20%">Designation</td>
+                    <td width="20%">Mobile</td>
+                    <td width="20%">Address</td>
                     <td width="70%">Image</td>
                 </tr>
                 </thead>
                 <tbody>
-                	@foreach($sikrities as $key=> $teacher)
+                	@foreach($committees as $key=> $committee)
                    <tr>
                    <td>{{ $key+1 }}</td>
                    <td>
-                      {{ $teacher->title }}
+                      {{ $committee->name }}
+                   </td>
+                   <td>
+                      {{ $committee->designation }}
+                   </td>
+                   <td>
+                      {{ $committee->mobile }}
+                   </td>
+                   <td>
+                      {{ $committee->address }}
                    </td>
                    
-                    <td><img src="{{ !empty($teacher->image) ? asset('upload/sikriti/' . $teacher->image) : asset('upload/teacherimage/default.png') }}"
-                        width="500" height="600" alt="sikriti Image">
+                    <td><img src="{{ !empty($committee->image) ? asset('upload/committee/' . $committee->image) : asset('upload/committee/default.png') }}"
+                        width="100" height="100" alt="committee Image">
 
                     </td>
                   </tr>
@@ -62,7 +74,7 @@
                  </tbody>
             </table>
 
-            {{ $sikrities->links() }}
+            {{ $committees->links() }}
     @endif
    </div>
 </div>

@@ -17,7 +17,7 @@ use App\Models\IssueBook;
 use App\Models\StudentClass;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Toastr;
 
 class StudentController extends Controller
 { 
@@ -47,6 +47,7 @@ class StudentController extends Controller
             'roll'=>'required',
             'class'=>'required',
             'address'=>'nullable',
+            'section_name' => 'nullable',
         ]);
 
       $code = rand(000000,999999);
@@ -66,11 +67,12 @@ class StudentController extends Controller
     	$data->roll = $request->roll;
     	$data->class = $request->class;
     	$data->address = $request->address;
+    	$data->section_name = $request->section_name;
       $data->password = Hash::make($code);
     	$data->code = $code;
     	$data->save();
-
-    	return redirect()->route('admin.student.view')->with('success','Student Created Successfully');
+      Toastr::success('Student Created Successfully', 'Success');
+      return back();
     }
         
         public function edit($id){
@@ -88,6 +90,7 @@ class StudentController extends Controller
             'roll'=>'required',
             'class'=>'required',
             'address'=>'nullable',
+            'section_name' => 'nullable',
         ]);
              $this->validate($request,[
             'name'=>'required',
@@ -95,6 +98,7 @@ class StudentController extends Controller
             'roll'=>'required',
             'class'=>'required',
             'address'=>'nullable',
+            'section_name' => 'nullable',
         ]);
             $data = User::find($id);
 
@@ -115,9 +119,10 @@ class StudentController extends Controller
          $data->roll = $request->roll;
          $data->class = $request->class;
          $data->address = $request->address;
+        $data->section_name = $request->section_name;
         $data->save();
-
-        return redirect()->route('admin.student.view')->with('success','Student Updated Successfully');
+        Toastr::success('Student Updated Successfully', 'Success');
+        return back();
 
         }
 
@@ -125,33 +130,33 @@ class StudentController extends Controller
             $user = User::find($id);
             $user->status = 0;
             $user->save();
-           return redirect()->route('admin.student.view')->with('success','Student Inactive Successfully');
+            Toastr::success('Student Inactive Successfully', 'Success');
+            return back();
         }
 
         public function active($id){
             $user = User::find($id);
             $user->status = 1;
             $user->save();
-          return redirect()->route('admin.student.view')->with('success','Librarian Active Successfully');
+            Toastr::success('Student Active Successfully', 'Success');
+            return back();
         } 
 
           public function delete($id){
             $student = User::find($id);
-
-          if (file_exists('public/upload/studentimage/' . $student->image) AND !
-            empty($student->image)){
-               unlink('public/upload/studentimage/' . $student->image);
-       }
+              if (file_exists('public/upload/studentimage/' . $student->image) AND !
+                empty($student->image)){
+                  unlink('public/upload/studentimage/' . $student->image);
+              }
             $student->delete();
-            return redirect()->route('admin.student.view')->with('success','Librarian Deleted Successfully');
+            return redirect()->route('admin.student.view')->with('success','Student Deleted Successfully');
           }  
 
 
         public function userwisebook(Request $request){
-      $data['allbooks'] = IssueBook::where('created_by',$request->user_id)->get();
-      return view('admin.user.user-allbook',$data);
-      
-    }
+          $data['allbooks'] = IssueBook::where('created_by',$request->user_id)->get();
+          return view('admin.user.user-allbook',$data);
+      }
 
          
 }

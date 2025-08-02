@@ -130,6 +130,15 @@
           </li>
 
            <li class="nav-item">
+            <a href="{{ route('admin.committee.view') }}" class="nav-link {{ request()->is('admin/committee/view') ? 'active' : '' }}">
+              <i class="fas fa-campground mr-2"></i>
+              <p>
+                Committee
+              </p>
+            </a>
+          </li>
+
+           <li class="nav-item">
             <a href="{{ route('admin.banner.view') }}" class="nav-link {{ request()->is('admin/banner/view') ? 'active' : '' }}">
               <i class="fas fa-place-of-worship mr-2"></i>
               <p>

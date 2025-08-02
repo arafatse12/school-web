@@ -3,7 +3,7 @@
 <div style="display: inline-block;float: left;width: 960px;border-bottom: 4px solid #e48257;">
 <div class="col" id="div-lang" style="height: 25px;">
 <div id="newNavigation"></div>
-<div id="div-lang-sel" style="float: left;">
+<div id="div-lang-sel" style="float: left;margin-top:5px">
 <div style="float: left;margin-left: 5px; font-size: 14px;text-align:center">
                             <a href="{{ route('public') }}">{{$setting->college_name}} </a>
                     </div>
@@ -63,8 +63,9 @@
          <li><a href="{{ route('teacher') }}">শিক্ষক</a></li>
         <li><a href="{{ url('/sikriti') }}">স্বীকৃতি</a></li>
         <li><a href="{{ route('our-student') }}">ছাত্র-ছাত্রী</a></li>
+        <li><a href="{{ route('total-our-student') }}">মোট ছাত্র-ছাত্রী</a></li>
          <li><a href="{{ url('principal-details/1') }}">প্রতিষ্ঠাতা</a></li>
-         <li><a href="{{ route('stuff') }}"> কর্মচারী</a></li>
+         <li><a href="{{ url('/committee') }}">কমিটি </a></li>
         </ul>
     </div>
 </div>
@@ -150,18 +151,50 @@
 </div>
 </li>
 <li class="col8 mzr-drop"><a href="{{url('/contact')}}" class="submenu">যোগাযোগ</a>
-
-<li class="col8 mzr-drop"><a href="#" class="submenu">লগইন</a>
-<div class="mzr-content drop-one-columns">
+    <div class="mzr-content drop-one-columns">
     <div class="one-col">
-        <h6>  </h6>
         <ul class="mzr-links">
-            <li><a href="{{url('/login')}}">লগইন</a></li>
-             {{-- <li><a target="_blank" href="{{$setting->student_login}}">শিক্ষার্থী লগইন</a></li> --}}
+            <li><a href="{{ route('contact.view') }}">প্রতিষ্ঠানের ঠিকানা</a></li>
+            <li><a target="_blank" href="{{ $setting->facebook }}">ফেসবুক পেইজ</a></li>
+            <li><a target="_blank" href="{{ $setting->youtube }}">ইউটিউব চ্যানেল</a></li>
         </ul>
     </div>
 </div>
-</li>
+
+@if(Auth::check())
+    {{-- Authenticated User --}}
+    <li class="col8 mzr-drop">
+        <a href="#" class="submenu">ড্যাশবোর্ড</a>
+        <div class="mzr-content drop-one-columns">
+            <div class="one-col">
+                <ul class="mzr-links">
+                    <li><a href="{{ url('/admin/dashboard') }}">ড্যাশবোর্ড</a></li>
+                    <li><a href="{{ route('logout') }}"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        লগআউট
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </li>
+
+    {{-- Logout Form --}}
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+@else
+    {{-- Guest (Not Logged In) --}}
+    <li class="col8 mzr-drop">
+        <a href="#" class="submenu">লগইন</a>
+        <div class="mzr-content drop-one-columns">
+            <div class="one-col">
+                <ul class="mzr-links">
+                    <li><a href="{{ route('login') }}">লগইন</a></li>
+                </ul>
+            </div>
+        </div>
+    </li>
+@endif
 
 
 </ul>
