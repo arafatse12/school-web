@@ -183,11 +183,8 @@
                     <div class="col-sm-9">
                     <select name="section_name" class="form-control" id="section_name">
                         <option value="">-- Select --</option>
-                        @php
-                            $sections = ['None', 'Section 1', 'Section 2', 'Section 3', 'Section 4', 'Section 5', 'Section 6'];
-                        @endphp
                         @foreach($sections as $section)
-                            <option value="{{ $section }}">{{ $section }}</option>
+                            <option value="{{ $section->section_name }}">{{ $section->section_name }}</option>
                         @endforeach
                     </select>
                    <font style="color:red">{{($errors)->has('section_name')?($errors->first('section_name')):''}}</font>
@@ -280,12 +277,9 @@
                   <div class="col-sm-9">
                       <select name="section_name" class="form-control" id="section_name">
                           <option value="">-- Select --</option>
-                          @php
-                              $sections = ['None', 'Section 1', 'Section 2', 'Section 3', 'Section 4', 'Section 5', 'Section 6'];
-                          @endphp
                           @foreach($sections as $section)
-                              <option value="{{ $section }}" {{ ($user->section_name == $section) ? 'selected' : '' }}>
-                                  {{ $section }}
+                              <option value="{{ $section->section_name }}" {{ ($user->section_name == $section->section_name) ? 'selected' : '' }}>
+                                  {{ $section->section_name }}
                               </option>
                           @endforeach
                       </select>
@@ -415,21 +409,12 @@ $(function () {
         required: true,
         
       },
-      mobile: {
-        required: true,
-        
-      },
       roll: {
         required: true,
         
       },
       class: {
         required: true,
-        
-      },
-       
-      address: {
-      required: true,
         
       },
 
@@ -443,10 +428,6 @@ $(function () {
 
       name: {
         required: "Please enter Name",
-        
-      },
-      mobile: {
-        required: "Please enter mobile",
         
       },
       class: {
@@ -486,41 +467,21 @@ $(function () {
         required: true,
         
       },
-      mobile: {
-        required: true,
-        
-      },
       roll: {
         required: true,
         
       },
-       
-      address: {
-      required: true,
-        
-      },
-
-
       class: {
         required: true,
         
       }
     },
     messages: {
-      email: {
-        required: "Please enter a email address",
-        email: "Please enter a vaild email address"
-        
-      },
-
       name: {
         required: "Please enter Name",
         
       },
-       mobile: {
-        required: "Please enter mobile",
-        
-      },
+
        roll: {
         required: "Please enter roll",
         

@@ -143,6 +143,17 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'adm
     Route::get('user/allbook/view',[App\Http\Controllers\admin\StudentController::class,'userwisebook'])->name('admin.student.allbook-view');
 
 
+    
+    // ==============Section==============
+
+Route::get('section/view',[App\Http\Controllers\admin\SectionController::class,'view'])->name('admin.section.view');
+Route::post('section/store',[App\Http\Controllers\admin\SectionController::class,'store'])->name('admin.section.store');
+Route::post('section/update/{id}',[App\Http\Controllers\admin\SectionController::class,'update'])->name('admin.section.update');
+Route::get('section/delete/{id}',[App\Http\Controllers\admin\SectionController::class,'delete'])->name('admin.section.delete');
+
+
+
+
     // ==============Category Section==============
 
     Route::get('category/view',[App\Http\Controllers\admin\CategoryController::class,'view'])->name('admin.category.view');

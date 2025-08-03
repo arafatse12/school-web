@@ -41,10 +41,7 @@
                 <thead>
                 <tr style="background-color: #001f3f;color: white;font-weight:bold;">
                     <td width="10%">Sl</td>
-                    <td width="20%">Name</td>
-                    <td width="20%">Designation</td>
-                    <td width="20%">Mobile</td>
-                    <td width="20%">Address</td>
+                    <td width="20%">Title</td>
                     <td width="70%">Image</td>
                 </tr>
                 </thead>
@@ -53,21 +50,25 @@
                    <tr>
                    <td>{{ $key+1 }}</td>
                    <td>
-                      {{ $committee->name }}
-                   </td>
-                   <td>
-                      {{ $committee->designation }}
-                   </td>
-                   <td>
-                      {{ $committee->mobile }}
-                   </td>
-                   <td>
-                      {{ $committee->address }}
+                      {{ $committee->title }}
                    </td>
                    
-                    <td><img src="{{ !empty($committee->image) ? asset('upload/committee/' . $committee->image) : asset('upload/committee/default.png') }}"
-                        width="100" height="100" alt="committee Image">
+                   @php
+                        $file = $committee->image;
+                        $filePath = 'upload/committee/' . $file;
+                        $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+                    @endphp
 
+                    <td>
+                        @if( in_array($extension, ['jpg', 'jpeg', 'png']) )
+                            <img src="{{ asset($filePath) }}" alt="image" height="500" width="500">
+                        @elseif( $extension == 'pdf' )
+                            <a target="_blank" href="{{ asset($filePath) }}">
+                                <i class="fa fa-file-pdf" style="color:red; font-size: 20px;"></i>
+                            </a>
+                        @else
+                            <img src="{{ asset('upload/committee/default.png') }}" alt="default" height="100" width="100">
+                        @endif
                     </td>
                   </tr>
                       @endforeach      

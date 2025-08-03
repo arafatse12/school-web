@@ -14,7 +14,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-              <li class="breadcrumb-item active">Committee</li>
+              <li class="breadcrumb-item active"> Committee </li>
             </ol>
           </div>
         </div><!-- /.row -->
@@ -48,20 +48,17 @@
             <div class="pannel" style="background-color:white;border-bottom: 5px solid #605ca8 ;margin-bottom: 20px;">
              <div class="pannel-header" style="background-color: #605ca8;color: white;padding: 10px">
                 <h5>Committee
-                 <button type="button" class="btn btn-warning float-right btn" data-toggle="modal" data-target="#addClass"><i class="fa fa-plus-circle"></i>Committee Add</button>
+                 <button type="button" class="btn btn-warning float-right btn" data-toggle="modal" data-target="#addClass"><i class="fa fa-plus-circle"></i> Committee Add </button>
                 </h5>
               </div> 
             <div class="card-body">
                 <table id="example1" class="table  table-hover table-sm">
                   <thead>
                   <tr style="background-color: #001f3f;color: white">
-                    <th>SL</th>
-                    <th>Name</th>
-                    <th>Designation</th>
-                    <th>Mobile</th>
-                    <th>Address</th>
-                    <th>Image</th>
-                    <th>Action</th>
+                    <th> SL </th>
+                    <th> Title </th>
+                    <th> Image </th>
+                    <th> Action </th>
                   </tr>
                   </thead>
                   <tbody>
@@ -69,11 +66,25 @@
                     @foreach($alldata as $key => $committee)
                     <tr>
                       <td>{{$key+1}}</td>
-                      <td>{{$committee->name}}</td>
-                      <td>{{$committee->designation}}</td>
-                      <td>{{$committee->mobile}}</td>
-                      <td>{{$committee->address}}</td>
-                      <td ><img src="{{ !empty($committee->image) ? asset('upload/committee/' . $committee->image) : asset('upload/committee/default.png') }}" alt="" height="100" width="100"></td>
+                      <td>{{$committee->title}}</td>
+                     
+                    @php
+                        $file = $committee->image;
+                        $filePath = 'upload/committee/' . $file;
+                        $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+                    @endphp
+
+                    <td>
+                        @if(in_array($extension, ['jpg', 'jpeg', 'png']))
+                            <img src="{{ asset($filePath) }}" alt="image" height="100" width="100">
+                        @elseif($extension == 'pdf')
+                            <a target="_blank" href="{{ asset($filePath) }}">
+                                <i class="fa fa-file-pdf" style="color:red; font-size: 20px;"></i>
+                            </a>
+                        @else
+                            <img src="{{ asset('upload/committee/default.png') }}" alt="default" height="100" width="100">
+                        @endif
+                    </td>
                      
                     <td> 
                      <button type="button" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#editClass-{{ $committee->id }}"><i class="fa fa-edit"></i></button>
@@ -105,7 +116,7 @@
         <div class="modal-dialog modal-small">
           <div class="modal-content"style="background-color:#d9dad6;border-bottom: 5px solid #605ca8 ;">
             <div class="modal-header " style="background-color: #605ca8;color: white;padding: 10px">
-              <h4 class="modal-title">Committee Add</h4>
+              <h4 class="modal-title"> Committee Add </h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
@@ -114,43 +125,19 @@
             <form method="post" action="{{route('admin.committee.store')}}"  enctype="multipart/form-data">
                 @csrf
                 <div class="form-group row">
-                     <label for="name"  class="col-sm-4 col-form-label">Name</label>
+                     <label for="title2"  class="col-sm-4 col-form-label">Title</label>
                     <div class="col-sm-8">
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Enter name">
-                        <font style="color:red">{{($errors)->has('name')?($errors->first('name')):''}}</font>
-                      </div>
-                </div>
-
-                 <div class="form-group row">
-                     <label for="designation"  class="col-sm-4 col-form-label">Designation</label>
-                    <div class="col-sm-8">
-                        <input type="text" name="designation" id="designation" class="form-control" placeholder="Enter designation">
-                        <font style="color:red">{{($errors)->has('designation')?($errors->first('designation')):''}}</font>
-                      </div>
-                </div>
-
-                 <div class="form-group row">
-                     <label for="mobile"  class="col-sm-4 col-form-label">Mobile</label>
-                    <div class="col-sm-8">
-                        <input type="number" name="mobile" id="mobile" class="form-control" placeholder="Enter mobile">
-                        <font style="color:red">{{($errors)->has('mobile')?($errors->first('mobile')):''}}</font>
-                      </div>
-                </div>
-
-                 <div class="form-group row">
-                     <label for="address"  class="col-sm-4 col-form-label">Address</label>
-                    <div class="col-sm-8">
-                        <input type="text" name="address" id="address" class="form-control" placeholder="Enter address">
-                        <font style="color:red">{{($errors)->has('address')?($errors->first('address')):''}}</font>
+                        <input type="text" name="title" id="title2" class="form-control" placeholder="Enter title">
+                        <font style="color:red">{{($errors)->has('title')?($errors->first('title')):''}}</font>
                       </div>
                 </div>
 
                 <div class="form-group row">
                      <label for="image"  class="col-sm-4 col-form-label">Image</label>
-                 <div class="col-sm-8">
-                    <input type="file" name="image" id="image" class="form-control">
-                     <font style="color:red">{{($errors)->has('image')?($errors->first('image')):''}}</font>
-                  </div>
+                    <div class="col-sm-8">
+                        <input type="file" name="image" id="image" class="form-control">
+                        <font style="color:red">{{($errors)->has('image')?($errors->first('image')):''}}</font>
+                    </div>
                 </div>
 
               <div class="modal-footer ">
@@ -172,7 +159,7 @@
         <div class="modal-dialog modal-small">
           <div class="modal-content"style="background-color:#d9dad6;border-bottom: 5px solid #605ca8 ;">
             <div class="modal-header " style="background-color: #605ca8;color: white;padding: 10px">
-              <h4 class="modal-title">Committee Edit </h4>
+              <h4 class="modal-title"> Committee Edit </h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
@@ -182,44 +169,20 @@
                 @csrf
                 
                  <div class="form-group row">
-                     <label for="name"  class="col-sm-4 col-form-label">Name</label>
+                     <label for="title1"  class="col-sm-4 col-form-label">Title</label>
                     <div class="col-sm-8">
-                        <input type="text" name="name" id="name" class="form-control" value="{{$committee->name}}">
-                        <font style="color:red">{{($errors)->has('name')?($errors->first('name')):''}}</font>
-                      </div>
-                </div>
-
-                 <div class="form-group row">
-                     <label for="designation"  class="col-sm-4 col-form-label">Designation</label>
-                    <div class="col-sm-8">
-                        <input type="text" name="designation" id="designation" class="form-control" value="{{$committee->designation}}">
-                        <font style="color:red">{{($errors)->has('designation')?($errors->first('designation')):''}}</font>
-                      </div>
-                </div>
-
-                 <div class="form-group row">
-                     <label for="mobile"  class="col-sm-4 col-form-label">Mobile</label>
-                    <div class="col-sm-8">
-                        <input type="number" name="mobile" id="mobile" class="form-control" value="{{$committee->mobile}}">
-                        <font style="color:red">{{($errors)->has('mobile')?($errors->first('mobile')):''}}</font>
-                      </div>
-                </div>
-
-                 <div class="form-group row">
-                     <label for="address"  class="col-sm-4 col-form-label">Address</label>
-                    <div class="col-sm-8">
-                        <input type="text" name="address" id="address" class="form-control"  value="{{$committee->address}}">
-                        <font style="color:red">{{($errors)->has('address')?($errors->first('address')):''}}</font>
+                        <input type="text" name="title" id="title1" class="form-control" value="{{$committee->title}}">
+                        <font style="color:red">{{($errors)->has('title')?($errors->first('title')):''}}</font>
                       </div>
                 </div>
 
                 <div class="form-group row">
                      <label for="image"  class="col-sm-4 col-form-label">Image</label>
-                 <div class="col-sm-8">
-                    <img src="{{asset('upload/committee/'.$committee->image)}}" alt="" height="100" width="100">
-                    <input type="file" name="image" id="image" class="form-control"  >
-                     <font style="color:red">{{($errors)->has('title')?($errors->first('image')):''}}</font>
-                  </div>
+                    <div class="col-sm-8">
+                      <img src="{{asset('upload/committee/'.$committee->image)}}" alt="" height="100" width="100">
+                      <input type="file" name="image" id="image" class="form-control"  >
+                      <font style="color:red">{{($errors)->has('image')?($errors->first('image')):''}}</font>
+                    </div>
                 </div>
 
               <div class="modal-footer ">

@@ -391,16 +391,14 @@ class FrontendController extends Controller
         $data['sliders'] = Slider::where('status',1)->orderBy('id','asc')->limit(5)->get();
         $data['setting'] = Setting::where('status',1)->first();
         $data['student'] = St::first();
-        $data['students'] = User::where('role_id', 3)
-            ->orderByRaw("FIELD(class, 'Six', 'Seven', 'Eight', 'Nine', 'Ten')")
-            ->orderByRaw("FIELD(section_name, '1', '2', '3', '4', '5', '6')")
-            ->paginate(20);
+        // $data['students'] = User::where('role_id', 3)
+        //     ->orderByRaw("FIELD(class, 'Six', 'Seven', 'Eight', 'Nine', 'Ten')")
+        //     ->orderByRaw("FIELD(section_name, '1', '2', '3', '4', '5', '6')")
+        //     ->paginate(20);
     
-        // $$data['students'] = User::where('role_id', 3)
-        //         ->orderBy('class', 'asc')
-        //         ->orderBy('section_name', 'asc')
-        //         ->paginate(20)
-        //         ->groupBy(['class', 'section_name']);
+        $data['students'] = User::where('role_id', 3)
+                 ->orderByRaw("FIELD(class, 'Six', 'Seven', 'Eight', 'Nine', 'Ten')")
+                ->paginate(20);
 
 
     return View('frontend.single.student.our-student',$data);

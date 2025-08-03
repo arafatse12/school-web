@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommitteesTable extends Migration
+class CreateSectionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateCommitteesTable extends Migration
      */
     public function up()
     {
-        Schema::create('committees', function (Blueprint $table) {
+        Schema::create('sections', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('image')->nullable();
+            $table->string('section_name');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateCommitteesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('committees');
+        Schema::dropIfExists('sections');
     }
 }

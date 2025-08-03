@@ -25,6 +25,7 @@ class StudentController extends Controller
     $data['alldata'] = User::where('role_id','3')->get();
     $data['roles'] = Role::get();
     $data['classes'] = StudentClass::get();
+    $data['sections'] = Section::get();
     return view('admin.student.view-student',$data);
     }
 
@@ -43,7 +44,7 @@ class StudentController extends Controller
 
             $this->validate($request,[
             'name'=>'required',
-            'mobile'=>'required',
+            'mobile'=>'nullable',
             'roll'=>'required',
             'class'=>'required',
             'address'=>'nullable',
@@ -86,7 +87,7 @@ class StudentController extends Controller
 
             $this->validate($request,[
             'name'=>'required',
-            'mobile'=>'required',
+            'mobile'=>'nullable',
             'roll'=>'required',
             'class'=>'required',
             'address'=>'nullable',
@@ -94,7 +95,7 @@ class StudentController extends Controller
         ]);
              $this->validate($request,[
             'name'=>'required',
-            'mobile'=>'required',
+            'mobile'=>'nullable',
             'roll'=>'required',
             'class'=>'required',
             'address'=>'nullable',

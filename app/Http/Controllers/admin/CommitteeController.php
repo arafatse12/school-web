@@ -19,15 +19,12 @@ class CommitteeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'designation' => 'nullable',
-            'mobile' => 'nullable',
-            'address' => 'nullable',
-            'image' => 'nullable|mimes:jpg,jpeg,png|max:2048',
+            'title' => 'nullable',
+            'image' => 'nullable|mimes:jpg,pdf,jpeg,doc,docx,png',
         ]);
 
         $committee = new Committee();
-        $committee->fill($request->except('image'));
+        $committee->title = $request->title;
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -44,15 +41,12 @@ class CommitteeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'designation' => 'nullable',
-            'mobile' => 'nullable',
-            'address' => 'nullable',
-            'image' => 'nullable|mimes:jpg,jpeg,png|max:2048',
+            'title' => 'nullable',
+            'image' => 'nullable|mimes:jpg,jpeg,pdf,doc,docx,png',
         ]);
 
         $committee = Committee::findOrFail($id);
-        $committee->fill($request->except('image'));
+        $committee->title = $request->title;
 
         if ($request->hasFile('image')) {
             $oldPath = public_path('upload/committee/' . $committee->image);

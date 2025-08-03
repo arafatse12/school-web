@@ -110,7 +110,7 @@
 </li>
 
 
-<li class="col6 mzr-drop"><a href="#" class="submenu">রেজাল্ট ও এডমিন কার্ড</a>
+<li class="col6 mzr-drop"><a href="#" class="submenu">রেজাল্ট ও এডমিট কার্ড</a>
 <div class="mzr-content drop-one-columns">
     <div class="one-col">
         <h6> </h6>

@@ -75,6 +75,15 @@
               </p>
             </a>
           </li>
+           <li class="nav-item">
+            <a href="{{ route('admin.section.view') }}" class="nav-link {{ request()->is('admin/section/view') ? 'active' : '' }}">
+              <i class="fa fa-certificate mr-2"></i>
+              <p>
+                Section Manage
+               
+              </p>
+            </a>
+          </li>
               <li class="nav-item">
             <a href="{{ route('admin.student.view') }}" class="nav-link {{ request()->is('admin/student/view') ? 'active' : '' }}">
               <i class="fa fa-graduation-cap mr-2"></i>
@@ -84,6 +93,7 @@
               </p>
             </a>
           </li>
+         
             <li class="nav-item">
             <a href="{{ route('admin.category.view') }}" class="nav-link {{ request()->is('admin/category/view') ? 'active' : '' }}">
               <i class="fa fa-certificate mr-2"></i>
@@ -93,6 +103,7 @@
               </p>
             </a>
           </li>
+          
            <li class="nav-item">
             <a href="{{ route('admin.studentclass.view') }}" class="nav-link {{ request()->is('admin/student/class/view') ? 'active' : '' }}">
               <i class="fas fa-archway mr-2"></i>
