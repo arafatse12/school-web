@@ -412,13 +412,13 @@ class FrontendController extends Controller
         $data['setting'] = Setting::where('status', 1)->first();
         $data['student'] = St::first();
 
-        $students = User::where('role_id', 3)->orderBy('class', 'desc')->get();
+        $students = User::where('role_id', 3)->orderByRaw("FIELD(class, 'Six', 'Seven', 'Eight', 'Nine', 'Ten')")->get();
 
         $grouped = [];
         $grandTotal = 0;
 
         foreach ($students as $student) {
-            $class = $student->class ?? 'Unknown';
+            $class = $student->class ?? '';
             $section = $student->section_name ?? '';
 
             if (!isset($grouped[$class])) {
