@@ -75,14 +75,14 @@
 <div class="mzr-content drop-one-columns">
     <div class="one-col">
         <h6> </h6>
-    <ul class="mzr-links">
-    <li><a href="{{ route('class-routine') }}">পরীক্ষার রুটিন</a></li>
-    <li><a href="{{ route('academic-syllabus') }}">একাডেমিক সিলেবাস</a></li>
-    <li><a href="{{ route('calendar') }}">শিক্ষা বর্ষপঞ্জি</a></li>
-    <li><a href="{{ route('class-routine') }}">ক্লাস রুটিন</a></li>
-    <li><a href="{{ route('our-student') }}">উপস্থিতি</a></li>
-    {{-- <li><a href="{{ route('class-routine') }}">প্রকাশনা</a></li> --}}
-       </ul>
+        <ul class="mzr-links">
+            <li><a href="{{ route('exam-routine') }}">পরীক্ষার রুটিন</a></li>
+            <li><a href="{{ route('academic-syllabus') }}">একাডেমিক সিলেবাস</a></li>
+            <li><a href="{{ route('calendar') }}">শিক্ষা বর্ষপঞ্জি</a></li>
+            <li><a href="{{ route('class-routine') }}">ক্লাস রুটিন</a></li>
+            <li><a href="{{ route('our-student') }}">উপস্থিতি</a></li>
+            <li><a href="{{ route('prospectus') }}">প্রকাশনা</a></li>
+        </ul>
     </div>
 </div>
 </li>
